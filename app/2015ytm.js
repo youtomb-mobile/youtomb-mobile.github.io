@@ -303,6 +303,7 @@ metaColorElm.content = "#000000";
 
 APIbaseURL = "https://corsproxy.io/?url=https://inv.nadeko.net/";
 APItrendURL = "https://corsproxy.io/?url=https://iv.melmac.space/";
+APIImageURL = "https://i.ytimg.com/";
 APIbaseURLWatch = "https://inv.nadeko.net/";
 APIbaseURLNew = "https://yt-api.p.rapidapi.com/";
 APIbaseURLPiped = "https://pipedapi.leptons.xyz/";
@@ -1154,7 +1155,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
 
         const image = document.createElement('img');
         image.classList.add('thumbnail-img', 'ytm15-img', 'lazy');
-        image.src = APIbaseURL + itemThumbnail;
+        image.src = APIImageURL + itemThumbnail;
         image.loading = "lazy";
         image.onload = function(){image.classList.add('loaded');};
 
@@ -2529,6 +2530,7 @@ window.addEventListener('hashchange', function (event) {
     }
     }
 });
+
 
 
 
