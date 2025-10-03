@@ -622,9 +622,9 @@ function renderDataTrending(homeShelfTrendingType, shelfTitle) {
 
     const getHomeData2 = new XMLHttpRequest();
     if (window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(1, 2)[0] !== "trending") {
-    getHomeData2.open('GET', APIbaseURL + 'api/v1/trending?type=' + homeShelfTrendingType, true, 'ytm15', 'JQJ53KrLAEY6E5qhgcm38PkSzw3bZXmk');
+    getHomeData2.open('GET', APItrendURL + 'api/v1/trending?type=' + homeShelfTrendingType, true, 'ytm15', 'JQJ53KrLAEY6E5qhgcm38PkSzw3bZXmk');
     } else if (window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(1, 2)[0] == "trending") {
-    getHomeData2.open('GET', APIbaseURL + 'api/v1/trending?type=' + trendType, true);
+    getHomeData2.open('GET', APItrendURL + 'api/v1/trending?type=' + trendType, true);
     }
     getHomeData2.setRequestHeader('Authorization','Basic eXRtMTU6SlFKNTNLckxBRVk2RTVxaGdjbTM4UGtTenczYlpYbWs=');
 
@@ -731,4 +731,5 @@ function renderDataTrending(homeShelfTrendingType, shelfTitle) {
     }
     }
 }
+
 
