@@ -302,6 +302,7 @@ metaColorElm.content = "#000000";
 }
 
 APIbaseURL = "https://corsproxy.io/?url=https://inv.nadeko.net/";
+APItrendURL = "https://corsproxy.io/?url=https://iv.melmac.space/";
 APIbaseURLWatch = "https://inv.nadeko.net/";
 APIbaseURLNew = "https://yt-api.p.rapidapi.com/";
 APIbaseURLPiped = "https://pipedapi.leptons.xyz/";
@@ -2528,5 +2529,6 @@ window.addEventListener('hashchange', function (event) {
     }
     }
 });
+
 
 
