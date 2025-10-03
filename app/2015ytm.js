@@ -1153,7 +1153,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
 
         const image = document.createElement('img');
         image.classList.add('thumbnail-img', 'ytm15-img', 'lazy');
-        image.src = itemThumbnail;
+        image.src = APIbaseURL + itemThumbnail;
         image.loading = "lazy";
         image.onload = function(){image.classList.add('loaded');};
 
@@ -2528,4 +2528,5 @@ window.addEventListener('hashchange', function (event) {
     }
     }
 });
+
 
