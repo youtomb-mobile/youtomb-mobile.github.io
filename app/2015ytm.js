@@ -570,7 +570,7 @@ dataModeChange();
 renderHeader();
 
 function renderCommentSection(parent, mediaType, cmSource, isCMPage, comntId, comntContinuation){
-    var cmBaseAPIURL = 'https://invidious.nerdvpn.de/api/v1/comments/';
+    var cmBaseAPIURL = 'https://cvmapi.elijahr.dev/api/v2/chat?vm=vm3&thing=';
 
     const commentSection = document.createElement("div");
     commentSection.classList.add("comment-section");
@@ -594,7 +594,7 @@ function renderCommentSection(parent, mediaType, cmSource, isCMPage, comntId, co
     commentSimplebox.classList.add("comment-simplebox");
     commentSimplebox.innerHTML = `
 <div class="profile-icon comment-simplebox-icon">
-<img class="profile-img ytm15-img lazy" loading="lazy" src="https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj"></img>
+<img class="profile-img ytm15-img lazy" loading="lazy" src="https://cvmapi.elijahr.dev/api/v2/vms/vm1/screenshot"></img>
 </div>
 <div class="comment-simplebox-input">
 <div class="comment-simplebox-placeholder">
