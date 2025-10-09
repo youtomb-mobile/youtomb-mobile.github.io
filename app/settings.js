@@ -472,7 +472,7 @@ function settingsPage() {
         "title": "APP_DEMATERIALIZE_UI",
         "subtitle": "",
         "pressed": APP_DEMATERIALIZE_UI_expflag == "true",
-        "pressed-default": false,
+        "pressed-default": true,
         "disabled": false,
         "lsitem": "APP_DEMATERIALIZE_UI"
       },
