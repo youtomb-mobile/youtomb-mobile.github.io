@@ -1642,7 +1642,7 @@ function renderMediaItem(parent, parentName, itemVideoId, itemThumbnail, itemLen
         }); */
 
         const channelData = new XMLHttpRequest();
-        channelData.open('GET', 'https://yt.lemnoslife.com/noKey/channels?part=snippet,status&id=' + itemAuthorId, true);
+        channelData.open('GET', 'https://gdata.vidtape.lol/console_browse?start-index=1&max-results=40&feed=videos_recently_featured&racy=include&app=desktop&id=' + itemAuthorId, true);
  
         channelData.send();
  
