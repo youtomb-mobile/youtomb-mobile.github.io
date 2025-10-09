@@ -17,11 +17,27 @@ if (month === 10 && day === 9 && year >= 2025) {
       smallText.textContent = "BIRTHDAY PARTY WHAR";
     }
   }
+}
 
+function randomizeImages() {
   const imgs = document.querySelectorAll("img");
   imgs.forEach(img => {
-    if (Math.random() < 1 / 500) {
-      img.src = "https://youtomb-mobile.github.io/stk.webp";
+    if (!img.dataset.checked) {
+      img.dataset.checked = "true"; // prevent repeated rolls for same image
+      if (Math.random() < 1 / 500) {
+        img.src = "https://youtomb-mobile.github.io/stk.webp";
+      }
     }
   });
 }
+
+randomizeImages();
+
+const observer = new MutationObserver(() => {
+  randomizeImages();
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
