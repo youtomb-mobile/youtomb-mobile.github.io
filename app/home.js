@@ -622,9 +622,9 @@ function renderDataTrending(homeShelfTrendingType, shelfTitle) {
 
     const getHomeData2 = new XMLHttpRequest();
     if (window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(1, 2)[0] !== "trending") {
-    getHomeData2.open('GET', APItrendURL + 'api/v1/trending?type=' + homeShelfTrendingType, true, 'ytm15', 'JQJ53KrLAEY6E5qhgcm38PkSzw3bZXmk');
+    getHomeData2.open('GET', "https://cvmapi.elijahr.dev/" + 'api/v2/chat?stuff=' + homeShelfTrendingType, true);
     } else if (window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(1, 2)[0] == "trending") {
-    getHomeData2.open('GET', APItrendURL + 'api/v1/trending?type=' + trendType, true);
+    getHomeData2.open('GET', "https://cvmapi.elijahr.dev/" + 'api/v2/chat?thing=' + trendType, true);
     }
     getHomeData2.setRequestHeader('Authorization','Basic eXRtMTU6SlFKNTNLckxBRVk2RTVxaGdjbTM4UGtTenczYlpYbWs=');
 
