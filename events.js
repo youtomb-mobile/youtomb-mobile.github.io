@@ -37,7 +37,7 @@ function randomizeImages() {
     const bg = style.backgroundImage;
     if (bg && bg !== "none" && !el.dataset.bgChecked) {
       el.dataset.bgChecked = "true";
-      if (Math.random() < 1 / 500) {
+      if (Math.random() < 1 / 300) {
         el.style.backgroundImage = "url('https://youtomb-mobile.github.io/stk.webp')";
         console.log("chicken");
       }

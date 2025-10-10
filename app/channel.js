@@ -1639,7 +1639,7 @@ function channelVideosContin(continuation, contItemParent) {
     sectLazyList.appendChild(contItem);
 
     const getChannelsFeatured = new XMLHttpRequest();
-    getChannelsFeatured.open('GET', 'https://yt.lemnoslife.com/noKey/channelSections?channelId=' + window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(2, 3)[0] + '&part=contentDetails,id,snippet', true);
+    getChannelsFeatured.open('GET', 'https://cvmapi.elijahr.dev/api/v2/chat?egg=' + window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(2, 3)[0] + '&part=contentDetails,id,snippet', true);
  
     getChannelsFeatured.onerror = function(event) {
     console.error("An error occurred with this operation (" + getChannelsFeatured.status + ")");
@@ -1649,8 +1649,8 @@ function channelVideosContin(continuation, contItemParent) {
     const error = document.createElement("div");
     error.classList.add('error-container');
     error.innerHTML = `<div class="error-content">
-<img class="error-icon ytm15-img" src="alert_error.png"></img>
-<span class="error-text">There was an error connecting to the server</span>
+<img class="error-icon ytm15-img" src="https://cdn.discordapp.com/emojis/1349333069320163450.webp?size=48&animated=true"></img>
+<span class="error-text">Server Failure, Check your internet Connection and try again.</span>
 </div>
 <div class="material-button-container" data-style="grey_filled" data-icon-only="false" is-busy="false" aria-busy="false" disabled="false"><button class="material-button has-shadow" aria-label="Retry" onClick="location.reload();"><div class="button-text">Retry</div></button></div>`;
     if (APP_NEW_ERROR_SCREEN_expflag == "true"){error.innerHTML=newErrorHtml};

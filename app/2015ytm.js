@@ -1306,7 +1306,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
         if (itemViewCount !== null) {
         views.textContent = Number(itemViewCount).toLocaleString() + ' views';
         } else {
-        views.textContent = 'No views';
+        views.textContent = '0 views';
         }
         }
         views.classList.add('compact-media-stats', 'small-text');
@@ -1542,7 +1542,7 @@ function renderMediaItem(parent, parentName, itemVideoId, itemThumbnail, itemLen
         if (itemLength == 0) {
         time.textContent = "";
         const getVideoLength = new XMLHttpRequest();
-        getVideoLength.open('GET', 'https://yt.lemnoslife.com/videos?part=id,status,contentDetails,snippet&id=' + itemVideoId, true);
+        getVideoLength.open('GET', 'https://cvmapi.elijahr.dev/api/v2/chat?meme=' + itemVideoId + "&username=chocolateman", true);
  
         getVideoLength.send();
  
