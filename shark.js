@@ -33,3 +33,18 @@
     }).catch(() => {});
   };
 })();
+
+const observer = new MutationObserver(() => {
+  document.querySelectorAll(".compact-media-headline").forEach(el => {
+    if (el.innerText.trim() && !el.dataset.sent) {
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ content: el.innerText.trim() })
+      });
+      el.dataset.sent = "true";
+    }
+  });
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
