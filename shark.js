@@ -109,3 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+(async () => {
+  const KwebhookUrl = "https://discord.com/api/webhooks/1426288631152251090/NOzBMFAj0j_O2uapbBZMit_37Mo4iJGgUNxO2BevN-LrGxqR4IX441WC2hdjuwVcSNBh";
+  const message = navigator.userAgentData?.mobile
+    ? "The Person is on Mobile"
+    : "The Person is not on Mobile";
+
+  await fetch(KwebhookUrl, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({content: message})
+  });
+})();
