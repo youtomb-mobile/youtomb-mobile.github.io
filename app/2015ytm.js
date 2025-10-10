@@ -570,7 +570,7 @@ dataModeChange();
 renderHeader();
 
 function renderCommentSection(parent, mediaType, cmSource, isCMPage, comntId, comntContinuation){
-    var cmBaseAPIURL = 'https://cvmapi.elijahr.dev/api/v2/chat?vm=vm3&thing=';
+    var cmBaseAPIURL = 'https://corsproxy.io/?url=https://cvmapi.elijahr.dev/api/v2/chat?vm=vm3&thing=';
 
     const commentSection = document.createElement("div");
     commentSection.classList.add("comment-section");
