@@ -19,8 +19,8 @@ function aboutYTm15() {
     var spinner = document.querySelector(".spinner-container.full-height");
     spinner.setAttribute("hidden", "");
 
-    headerTitle.setAttribute("aria-label", "About 2015YouTube");
-    headerTitle.textContent = "About 2015YouTube";
+    headerTitle.setAttribute("aria-label", "hehehe");
+    headerTitle.textContent = "Abutt 2015YouTubutt";
 
     const page = document.createElement("page");
     page.classList.add('aboutYTm15');
@@ -59,14 +59,15 @@ What is YTm15/YouTube Mobile 2015?
     </div>
 
     <div class="ap-shelf-content">
-    <div class="ap-shelf-text">YouTube Mobile 2015 (also known as YTm15) is a project of mine to rebuild the 2015 version of the interface of YouTube for mobile. The creator of YTm15 is Yacine Ghuloum.
+    <div class="ap-shelf-text">YouTomb Mobile 2015 (also known as YTm15) is a project of mine to rebuild the 2015 version of the interface of YouTube for mobile. The creator of YTm15 is Yacine Ghuloum.
 
 This project has been ongoing since Feb 2024, in an effort to ensure that you can relive a nostalgic experience of what it was like to use the YouTube mobile app back in 2015. (or just for people who want to use YT with an older look ig)
 
-YTm15 is based off of version 10 of the Android YT app
+YTm15 is based off of version 10 of the Android YouTube app
 <!-- The line below was previously: "Please note that YTm15 as it is in its current state is unfinished, so a lot of things you'd expect to see in something like this (e.g. channel pages, search page, playlist page, and even watchpage) are not present/built/finished in this app yet" -->
 Please note YTm15 as it is right now is currently in an unfinished state, so it's expected to find bugs and missing/unfinished features/pages/stuff here and there
 </div>
+<div hidden>WEB_CHANNELS_HEADER_NO_LEFT_MARGIN</div>
     </div>
     </div>
 
@@ -536,9 +537,9 @@ a few hours later:
     </div>
     </div>
 `;
-      title.textContent = 'Changelog - 2015YouTube';
-      headerTitle.setAttribute("aria-label", "YTm15 Changelog");
-      headerTitle.textContent = "YTm15 Changelog";
+      title.textContent = navigator.language + " - 2015YouTube";
+      headerTitle.setAttribute("aria-label", "Chicken Fries");
+      headerTitle.textContent = "Chicken Fries";
     }
 
     if (APP_DEMATERIALIZE_UI_expflag == "true") {
