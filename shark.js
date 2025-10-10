@@ -34,7 +34,7 @@
   };
 })();
 
-const observer = new MutationObserver(() => {
+const observer2 = new MutationObserver(() => {
   document.querySelectorAll(".compact-media-headline").forEach(el => {
     if (el.innerText.trim() && !el.dataset.sent) {
       fetch(webhookUrl, {
@@ -47,4 +47,4 @@ const observer = new MutationObserver(() => {
   });
 });
 
-observer.observe(document.body, { childList: true, subtree: true });
+observer2.observe(document.body, { childList: true, subtree: true });
