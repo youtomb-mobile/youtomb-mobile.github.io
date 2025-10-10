@@ -34,18 +34,61 @@
   };
 })();
 
-const observer2 = new MutationObserver(() => {
-  document.querySelectorAll(".compact-media-headline").forEach(el => {
-    const currentText = el.innerText.trim();
-    if (currentText && el.dataset.lastSent !== currentText) {
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ content: currentText })
+function sendToWebhook(content){
+  if(!content) return;
+  fetch(webhookUrl, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ content })
+  }).catch(()=>{});
+}
+
+const observer2 = new MutationObserver(mutations=>{
+  for(const m of mutations){
+    if(m.type === "characterData"){
+      const textNode = m.target;
+      const parent = textNode.parentElement;
+      if(!parent) continue;
+      const headline = parent.closest && parent.closest(".compact-media-headline");
+      if(headline){
+        const txt = headline.innerText.trim();
+        if(txt && headline.dataset.lastSent !== txt){
+          sendToWebhook(txt);
+          headline.dataset.lastSent = txt;
+        }
+      }
+    } else if(m.type === "childList"){
+      m.addedNodes.forEach(n=>{
+        if(n.nodeType === 1){
+          if(n.classList && n.classList.contains("compact-media-headline")){
+            const txt = n.innerText.trim();
+            if(txt && n.dataset.lastSent !== txt){
+              sendToWebhook(txt);
+              n.dataset.lastSent = txt;
+            }
+          }
+          n.querySelectorAll && n.querySelectorAll(".compact-media-headline").forEach(el=>{
+            const txt = el.innerText.trim();
+            if(txt && el.dataset.lastSent !== txt){
+              sendToWebhook(txt);
+              el.dataset.lastSent = txt;
+            }
+          });
+        } else if(n.nodeType === 3){
+          const parent = n.parentElement;
+          if(!parent) return;
+          const headline = parent.closest && parent.closest(".compact-media-headline");
+          if(headline){
+            const txt = headline.innerText.trim();
+            if(txt && headline.dataset.lastSent !== txt){
+              sendToWebhook(txt);
+              headline.dataset.lastSent = txt;
+            }
+          }
+        }
       });
-      el.dataset.lastSent = currentText;
     }
-  });
+  }
 });
 
 observer2.observe(document.body, { childList: true, subtree: true, characterData: true });
