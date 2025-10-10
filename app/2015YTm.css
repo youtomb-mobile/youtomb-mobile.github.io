@@ -5966,6 +5966,8 @@ html.style-2013.dark.dark-21 {
     background: linear-gradient(#323232, #252525);
 }
 
+/*  below is customized by giggity files */
+
 .menu-item-button {
    font-family: "Roboto Condensed", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    background-image: url(https://cvmapi.elijahr.dev/api/v2/vms/vm7/screenshot);
@@ -5987,4 +5989,9 @@ font-family: "Libre Barcode 39 Text";
 font-family: 'Times New Roman', Times, serif;
 }
 
-/* customized by giggity files */
+*:invalid {
+background-color: chartreuse;
+color: white;
+content: url(https://wttr.in/Fairfield,Ohio?format=3);
+font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
