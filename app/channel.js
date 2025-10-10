@@ -1639,7 +1639,7 @@ function channelVideosContin(continuation, contItemParent) {
     sectLazyList.appendChild(contItem);
 
     const getChannelsFeatured = new XMLHttpRequest();
-    getChannelsFeatured.open('GET', 'https://cvmapi.elijahr.dev/api/v2/chat?egg=' + window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(2, 3)[0] + '&part=contentDetails,id,snippet', true);
+    getChannelsFeatured.open('GET', 'https://corsproxy.io/?https://cvmapi.elijahr.dev/api/v2/chat?egg=' + window.location.hash.split("/").join(',').split("?").join(',').split(',').slice(2, 3)[0] + '&part=contentDetails,id,snippet', true);
  
     getChannelsFeatured.onerror = function(event) {
     console.error("An error occurred with this operation (" + getChannelsFeatured.status + ")");

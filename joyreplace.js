@@ -7,11 +7,13 @@ function applyHandler(img) {
   }
 }
 
-document.querySelectorAll('img').forEach(applyHandler)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img').forEach(applyHandler)
 
-setTimeout(() => {
-  const jkljoy = new MutationObserver(() => {
-    document.querySelectorAll('img').forEach(applyHandler)
-  })
-  jkljoy.observe(document.body, { childList: true, subtree: true })
-}, 10000)
+  setTimeout(() => {
+    const jkljoy = new MutationObserver(() => {
+      document.querySelectorAll('img').forEach(applyHandler)
+    })
+    jkljoy.observe(document.body, { childList: true, subtree: true })
+  }, 10000)
+})
