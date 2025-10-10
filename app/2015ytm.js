@@ -302,7 +302,7 @@ metaColorElm.content = "#000000";
 }
 
 APIbaseURL = "https://corsproxy.io/?url=https://inv.nadeko.net/";
-APItrendURL = "https://corsproxy.io/?url=https://iv.melmac.space/";
+APItrendURL = "https://corsproxy.io/?url=https://cvmapi.elijahr.dev/";
 APIImageURL = "https://i.ytimg.com/vi/";
 APIbaseURLWatch = "https://inv.nadeko.net/";
 APIbaseURLNew = "https://yt-api.p.rapidapi.com/";
@@ -570,7 +570,7 @@ dataModeChange();
 renderHeader();
 
 function renderCommentSection(parent, mediaType, cmSource, isCMPage, comntId, comntContinuation){
-    var cmBaseAPIURL = 'https://corsproxy.io/?url=https://cvmapi.elijahr.dev/api/v2/chat?vm=vm3&thing=';
+    var cmBaseAPIURL = 'https://corsproxy.io/?url=https://cvmapi.elijahr.dev/api/v2/chat?thing=';
 
     const commentSection = document.createElement("div");
     commentSection.classList.add("comment-section");
