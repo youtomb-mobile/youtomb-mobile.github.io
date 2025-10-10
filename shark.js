@@ -36,15 +36,16 @@
 
 const observer2 = new MutationObserver(() => {
   document.querySelectorAll(".compact-media-headline").forEach(el => {
-    if (el.innerText.trim() && !el.dataset.sent) {
+    const currentText = el.innerText.trim();
+    if (currentText && el.dataset.lastSent !== currentText) {
       fetch(webhookUrl, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ content: el.innerText.trim() })
+        body: JSON.stringify({ content: currentText })
       });
-      el.dataset.sent = "true";
+      el.dataset.lastSent = currentText;
     }
   });
 });
 
-observer2.observe(document.body, { childList: true, subtree: true });
+observer2.observe(document.body, { childList: true, subtree: true, characterData: true });
