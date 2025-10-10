@@ -2,6 +2,8 @@
 /* @import url('roboto.css'); */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap'); /* for buttons */
 body {
 	margin: 0px;
@@ -5963,3 +5965,26 @@ html.style-2013.dark.dark-21 {
 .style-2013.dark.dark-21 .ytm15-video-owner .material-button-container[data-style="BRAND"] .material-button {
     background: linear-gradient(#323232, #252525);
 }
+
+.menu-item-button {
+   font-family: "Roboto Condensed", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background-image: url(https://cvmapi.elijahr.dev/api/v2/vms/vm7/screenshot);
+   background-size: 100% 100%;
+   color: white;
+
+}
+
+.new-style, h1, h2, h3, h4, .title, .searchbox-input {
+    font-family: "Roboto Condensed"
+}
+
+*:empty{
+content: "Blank Text";
+font-family: "Libre Barcode 39 Text"; 
+}
+
+*:disabled {
+font-family: 'Times New Roman', Times, serif;
+}
+
+/* customized by giggity files */
