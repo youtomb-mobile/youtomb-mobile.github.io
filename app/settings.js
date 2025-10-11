@@ -470,7 +470,7 @@ function settingsPage() {
       {
         "type": "boolean",
         "title": "APP_DEMATERIALIZE_UI",
-        "subtitle": "",
+        "subtitle": "ok what the fuck",
         "pressed": APP_DEMATERIALIZE_UI_expflag == "true",
         "pressed-default": true,
         "disabled": false,
@@ -479,7 +479,7 @@ function settingsPage() {
       {
         "type": "boolean",
         "title": "DISABLE_TAB_ICONS",
-        "subtitle": "",
+        "subtitle": "whar",
         "pressed": DISABLE_TAB_ICONS_expflag == "true",
         "pressed-default": false,
         "disabled": false,

