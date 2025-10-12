@@ -93,6 +93,7 @@ transition: margin .2s, padding .2s;
     transition: transform .25s;
 }
 .tab-content:empty {
+    display: none;
 font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -6026,4 +6027,8 @@ background-image: url(https://cvmapi.elijahr.dev/api/v2/vms/vm1/screenshot);
 
 *.ytm15-dialog {
 font-family: "Noto Sans", sans-serif;
+}
+
+*.material-button-container.subscribe-button:not(:hover) {
+font-style: italic;
 }
