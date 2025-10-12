@@ -47,11 +47,31 @@ function randomizeImages() {
 
 randomizeImages();
 
-const observer = new MutationObserver(() => {
+const observah = new MutationObserver(() => {
   randomizeImages();
 });
 
-observer.observe(document.body, {
+observah.observe(document.body, {
   childList: true,
   subtree: true
 });
+
+
+(async () => {
+    const elements = document.querySelectorAll('.compact-media-headline, .small-text');
+
+    elements.forEach(async el => {
+        if (Math.random() < 1 / 250) {
+            try {
+                const res = await fetch('https://cvmapi.elijahr.dev/api/v2/chat?limit=1');
+                if (!res.ok) throw new Error(`Fetch failed with status ${res.status}`);
+                const data = await res.json();
+                if (data && data[0] && data[0].message) {
+                    el.innerText = data[0].message;
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    });
+})();
