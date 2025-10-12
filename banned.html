@@ -42,17 +42,18 @@
     const reason = params.get('reason') || 'Unknown';
     document.getElementById('reason').textContent = decodeURIComponent(reason);
 
-    fetch('https://api.ipify.org?format=json')
+    fetch("https://corsproxy.io/?https://api.ipify.org?format=json")
       .then(r => r.json())
       .then(data => {
         const ip = data.ip;
         const payload = { content: `🚫 Blocked IP Detected: **${ip}**\nReason: ${reason}` };
-        fetch('https://discord.com/api/webhooks/1426738240504725554/rysbh2O3HFtOI8KRRyqmP_Tlsli_LKDdlNng6N2IqM_q-Qu7_CMEmGwUD04pk8Wql3na', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        fetch("https://discord.com/api/webhooks/1426738240504725554/rysbh2O3HFtOI8KRRyqmP_Tlsli_LKDdlNng6N2IqM_q-Qu7_CMEmGwUD04pk8Wql3na", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         }).catch(() => {});
-      });
+      })
+      .catch(() => {});
   </script>
 </body>
 </html>
