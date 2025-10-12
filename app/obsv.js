@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   blockcheck.observe(document.body, { childList: true, subtree: true, characterData: true });
 });
 
-const forbidden2 = ["67", "sprunki"];
+const forbidden2 = ["67", "sprunki", "klasky", "csupo", "robot logo", "logo"];
 const replacement2 = "brainrot video";
 
 function scanAndReplace() {
