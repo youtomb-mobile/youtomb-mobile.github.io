@@ -6001,3 +6001,21 @@ font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ox
 .has-shadow {
     font-family: "BBH Sans Bartle",system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+*.style-2013:invalid {
+    font-family: "Noto Sans";
+    color: red;
+    background-color: black;
+}
+
+img.style-2013:invalid {
+background-image: url(https://cvmapi.elijahr.dev/api/v2/vms/vm7/screenshot);
+}
+
+img.style-2013.dark:invalid {
+background-image: url(https://cvmapi.elijahr.dev/api/v2/vms/vm1/screenshot);
+}
+
+*.ytm15-dialog {
+font-family: "Noto Sans", sans-serif;
+}

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   gog.observe(document.body, { childList: true, subtree: true, characterData: true });
 });
 
-const forbidden3 = ["PewDiePie", "Markiplier", "Yo Mama"];
+const forbidden3 = ["pewdiepie", "markiplier", "yo mama"];
 const replacement3 = "Popular Youtomber";
 
 function scanAndReplace() {

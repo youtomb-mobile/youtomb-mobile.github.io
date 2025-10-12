@@ -71,37 +71,7 @@ Please note YTm15 as it is right now is currently in an unfinished state, so it'
     </div>
     </div>
 
-    <div class="ap-shelf">
-    <div class="ap-shelf-header">
-    <h3>
-Stuff YTm15 makes use of
-    </h3>
-    </div>
-
-    <div class="ap-shelf-content">
-    <div class="ap-shelf-text">APIs:
--(formerly) Invidious API (<a href="https://docs.invidious.io/api/">https://docs.invidious.io/api/</a>) [<!-- to be replaced -->replaced by YT-API from rapidapi, this API no-longer works so it will no-longer be used]
-
--(formerly) YouTube Operational API (<a href="https://yt.lemnoslife.com/">https://yt.lemnoslife.com/</a>) [this API is dead so it's no-longer in use]
-
--YT-API from RapidAPI (credit to ytjar) (<a href="https://rapidapi.com/ytjar/api/yt-api">https://rapidapi.com/ytjar/api/yt-api</a>)
-
--Piped API (<a href="https://docs.piped.video/docs/api-documentation/">https://docs.piped.video/docs/api-documentation/</a>)
-
--Return YouTube Dislike API (<a href="https://returnyoutubedislikeapi.com/swagger/">https://returnyoutubedislikeapi.com/swagger/</a>)
-
-Player:
--Custom-built player made just for YTm15 (uses the Invidious API) (You can use YT's embed player as a fallback by going to "player 3-square menu" > "YT iframe player", in case the YTm15 player doesn't play)
-(Formely used YouTube's embed player, and Invidious' embed player before that)
-<!-- Polyfills:
--Polyfill.io (<a href="https://polyfill.io/">https://polyfill.io/</a>) (this line of text was removed on 31 Aug 2024 due to polyfill.io being shut down for some reason) -->
-Other JS Plugins:
--Swipe Listener (<a href="https://github.com/umanghome/swipe-listener">https://github.com/umanghome/swipe-listener</a>)
-</div>
-    </div>
-    </div>
-
-    <div class="ap-shelf">
+<div class="ap-shelf">
     <div class="ap-shelf-header">
     <h3>
 Changelog
