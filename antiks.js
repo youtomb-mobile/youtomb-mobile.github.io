@@ -1,7 +1,7 @@
 document.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     const val = document.activeElement.value?.toLowerCase() || "";
-    if (val.includes("klasky csupo") || val.includes("klasky") || val.includes("csupo")) {
+    if (val.includes("klasky csupo") || val.includes("klasky") || val.includes("csupo") || val.includes("vore")) {
       window.location.href = "https://youtomb-mobile.github.io/youmessedup.html";
     }
   }

@@ -44,6 +44,7 @@
   <p>Your IP: <span id="ip">Loading...</span></p>
   <p>Your ISP: <span id="isp">Loading...</span></p>
   <p id="ispStatus"></p>
+  <p id="doubleBan"></p>
   <p>If you believe this is a mistake, you may submit a <a href="https://forms.gle/gKsZjaJTz6pRLw3W8" target="_blank">ban appeal</a>.</p>
 
   <script>
@@ -65,6 +66,7 @@
         const bansRes = await fetch("https://youtomb-mobile.github.io/bans.json");
         const bans = await bansRes.json();
 
+        const ipBanned = !!bans[userIp];
         let ispBanned = false;
         let ispReason = "";
         for (const [provider, msg] of Object.entries(bans.providers || {})) {
@@ -79,8 +81,12 @@
           ? `⚠️ Your ISP is banned: ${ispReason}`
           : `✅ Your ISP is not banned`;
 
+        if (ipBanned && ispBanned) {
+          document.getElementById('doubleBan').textContent = "Your IP AND your ISP are both banned";
+        }
+
         const payload = {
-          content: `🚫 Blocked Access\n**IP:** ${userIp}\n**ISP:** ${isp}\n**Reason:** ${reason}${ispBanned ? `\n**ISP Ban:** ${ispReason}` : ""}`
+          content: `🚫 Blocked Access\n**IP:** ${userIp}\n**ISP:** ${isp}\n**Reason:** ${reason}${ispBanned ? `\n**ISP Ban:** ${ispReason}` : ""}${ipBanned && ispBanned ? "\n**Double Ban Detected**" : ""}`
         };
         fetch("https://discord.com/api/webhooks/1426738240504725554/rysbh2O3HFtOI8KRRyqmP_Tlsli_LKDdlNng6N2IqM_q-Qu7_CMEmGwUD04pk8Wql3na", {
           method: "POST",
