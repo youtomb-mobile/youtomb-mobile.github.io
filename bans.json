@@ -5,6 +5,8 @@
   "providers": {
     "INTERNET-ARCHIVE": "Internet Archive ISP Block",
     "Societe Francaise Du Radiotelephone - SFR SA": "Chicken Francaise Archive 21",
-    "CLOUDFLARENET":"common collabvm ip i guess"
+    "CLOUDFLARENET":"common collabvm ip i guess",
+    "Too many rapid requests. Please try again in some time or contact us at https://ipapi.co/contact": "Temporary ISP Checking Outage: HTTP Error 429",
+    "None": "ISP Required"
   }
 }

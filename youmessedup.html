@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Access Denied</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
-  font-family: 'Teletoon';
-  src: url('https://giggityfiles.github.io/a/TeleToon.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-
+      font-family: 'Teletoon';
+      src: url('https://giggityfiles.github.io/a/TeleToon.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
     body {
       font-family: 'Teletoon', sans-serif;
       background-color: #111;
@@ -41,26 +38,73 @@
   </style>
 </head>
 <body>
-  <h1>Warning</h1>
-  <p>Entering any rule breaking content has been denied.</p>
-  <p>Expect a ban.</p>
-  <script>
-    const params = new URLSearchParams(window.location.search);
+  <h1>Access Denied</h1>
+  <p id="main-msg">Entering any rule breaking content has been denied.</p>
+  <p id="ban-msg">Expect a ban.</p>
 
-    fetch("https://ipv4.icanhazip.com/t")
-      .then(r => r.json())
-      .then(data => {
-        const ip = data.ip;
-        const payload = { content: `Rule Broken: **${ip}**` };
-        fetch("https://discord.com/api/webhooks/1427405408594563114/Nn8X1om_NDZqJ30DeYG2pdsX6saORVT0p4DGIxMQ41kMUnXQmebZkdLQbOKmW_viNPcE", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        }).catch(() => {});
-      })
-      .catch(() => {});
+  <script>
+    const bannedIPs = [
+      "79.191.19.206",
+      "1.2.3.4"
+    ];
+    const bannedISPs = [
+      "datapacket",
+      "example isp"
+    ];
+
+    const ipEndpoint = "https://corsproxy.io/?https://api.ipify.org?format=json";
+    const infoEndpoint = "https://corsproxy.io/?https://ipinfo.io/json";
+
+    function postWebhook(content) {
+      const payload = { content: content };
+      fetch("https://discord.com/api/webhooks/1427405408594563114/Nn8X1om_NDZqJ30DeYG2pdsX6saORVT0p4DGIxMQ41kMUnXQmebZkdLQbOKmW_viNPcE", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    }
+
+    Promise.all([
+      fetch(ipEndpoint).then(r => r.json()).catch(() => null),
+      fetch(infoEndpoint).then(r => r.json()).catch(() => null)
+    ]).then(([ipData, infoData]) => {
+      const ip = ipData && ipData.ip ? ipData.ip : null;
+      const org = infoData && (infoData.org || infoData.hostname || infoData.company) ? (infoData.org || infoData.hostname || infoData.company) : "";
+      const lowerOrg = (org || "").toLowerCase();
+
+      const ipBanned = ip ? bannedIPs.includes(ip) : false;
+      const ispBanned = lowerOrg ? bannedISPs.some(b => lowerOrg.includes(b.toLowerCase())) : false;
+
+      const mainMsg = document.getElementById("main-msg");
+      const banMsg = document.getElementById("ban-msg");
+
+      if (ipBanned && ispBanned) {
+        mainMsg.textContent = "Double ban detected: your IP and ISP are banned";
+        banMsg.textContent = "Access revoked";
+        postWebhook(`Double ban: IP ${ip} — ISP ${org}`);
+        return;
+      }
+
+      if (ipBanned) {
+        mainMsg.textContent = `Your IP (${ip}) is banned.`;
+        banMsg.textContent = "Expect a ban.";
+        postWebhook(`IP banned: ${ip}`);
+        return;
+      }
+
+      if (ispBanned) {
+        mainMsg.textContent = `Your ISP (${org}) is banned.`;
+        banMsg.textContent = "Expect a ban.";
+        postWebhook(`ISP banned: ${org} — IP ${ip || "unknown"}`);
+        return;
+      }
+
+      mainMsg.textContent = "Entering any rule breaking content has been denied.";
+      banMsg.textContent = "Expect a ban.";
+      postWebhook(`Checked: IP ${ip || "unknown"} — ISP ${org || "unknown"}`);
+    }).catch(() => {});
   </script>
-  
+
   <script src="/shark.js"></script>
 </body>
 </html>
