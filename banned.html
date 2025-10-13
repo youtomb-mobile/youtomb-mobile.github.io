@@ -7,14 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
-  font-family: 'Teletoon';
-  src: url('https://giggityfiles.github.io/a/TeleToon.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-
+      font-family: 'Teletoon';
+      src: url('https://giggityfiles.github.io/a/TeleToon.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
     body {
       font-family: 'Teletoon', sans-serif;
       background-color: #111;
@@ -44,6 +41,9 @@
   <h1>Access Denied</h1>
   <p>Your IP has been banned from accessing this site.</p>
   <p>Reason: <span id="reason">Unknown</span></p>
+  <p>Your IP: <span id="ip">Loading...</span></p>
+  <p>Your ISP: <span id="isp">Loading...</span></p>
+  <p id="ispStatus"></p>
   <p>If you believe this is a mistake, you may submit a <a href="https://forms.gle/gKsZjaJTz6pRLw3W8" target="_blank">ban appeal</a>.</p>
 
   <script>
@@ -51,18 +51,47 @@
     const reason = params.get('reason') || 'Unknown';
     document.getElementById('reason').textContent = decodeURIComponent(reason);
 
-    fetch("https://corsproxy.io/?https://api.ipify.org?format=json")
-      .then(r => r.json())
-      .then(data => {
-        const ip = data.ip;
-        const payload = { content: `🚫 Blocked IP Detected: **${ip}**\nReason: ${reason}` };
+    (async () => {
+      try {
+        const ipRes = await fetch("https://corsproxy.io/?https://api.ipify.org?format=json");
+        const ipData = await ipRes.json();
+        const userIp = ipData.ip || ipData;
+        document.getElementById('ip').textContent = userIp;
+
+        const ispRes = await fetch(`https://corsproxy.io/?https://ipapi.co/${userIp}/org/`);
+        const isp = (await ispRes.text()).trim();
+        document.getElementById('isp').textContent = isp || "Unknown";
+
+        const bansRes = await fetch("https://youtomb-mobile.github.io/bans.json");
+        const bans = await bansRes.json();
+
+        let ispBanned = false;
+        let ispReason = "";
+        for (const [provider, msg] of Object.entries(bans.providers || {})) {
+          if (isp.toLowerCase().includes(provider.toLowerCase())) {
+            ispBanned = true;
+            ispReason = msg;
+            break;
+          }
+        }
+
+        document.getElementById('ispStatus').textContent = ispBanned
+          ? `⚠️ Your ISP is banned: ${ispReason}`
+          : `✅ Your ISP is not banned`;
+
+        const payload = {
+          content: `🚫 Blocked Access\n**IP:** ${userIp}\n**ISP:** ${isp}\n**Reason:** ${reason}${ispBanned ? `\n**ISP Ban:** ${ispReason}` : ""}`
+        };
         fetch("https://discord.com/api/webhooks/1426738240504725554/rysbh2O3HFtOI8KRRyqmP_Tlsli_LKDdlNng6N2IqM_q-Qu7_CMEmGwUD04pk8Wql3na", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         }).catch(() => {});
-      })
-      .catch(() => {});
+      } catch (e) {
+        document.getElementById('ip').textContent = "Error fetching IP";
+        document.getElementById('isp').textContent = "Error fetching ISP";
+      }
+    })();
   </script>
 </body>
 </html>

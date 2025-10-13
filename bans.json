@@ -1,6 +1,8 @@
 {
   "79.79.42.69": "THIS IS A TEST IP",
   "207.241.235.134": "Internet Archive 1",
-  "207.241.225.60": "Internet Archive 2"
-  
+  "207.241.225.60": "Internet Archive 2",
+  "providers": {
+    "archive.org": "Internet Archive ISP Block"
+  }
 }
