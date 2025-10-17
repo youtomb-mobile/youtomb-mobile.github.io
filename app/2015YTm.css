@@ -15,6 +15,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'FFDIN Bold';
+  src: url('https://file.garden/Z3HtEpAjyGTEZiXW/DINBEK-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
 	margin: 0px;
 	font-size: 1.4rem;
@@ -6031,4 +6038,94 @@ font-family: "Noto Sans", sans-serif;
 
 *.material-button-container.subscribe-button:not(:hover) {
 font-style: italic;
+}
+
+@keyframes dialog-open-holo {
+    0% {
+        opacity: 0;
+        transform: scale(-1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes dialog-close-holo {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(-1);
+    }
+}
+
+@keyframes dialog-close {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(100%);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+@keyframes .dialog-body-open {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    1% {
+        opacity: 1;
+        transform: scale(5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(10);
+    }
+}
+
+@keyframes player-watch-2013-close {
+0% {
+    transform: rotateX('360deg');
+    opacity: 1;
+}
+100% {
+    transform: rotateX('360deg');
+    opacity: 0;
+}
+
+.settings-links-group {
+    margin-top: 20px; /* space from previous sidebar items */
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* subtle separator line */
+}
+
+.settings-links-group h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #ccc; /* slightly lighter than normal text */
+    padding-left: 10px;
+}
+
+.settings-link {
+    display: block;
+    padding: 6px 12px;
+    font-size: 0.85em;
+    color: #fff; /* or your sidebar text color */
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.settings-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
 }
