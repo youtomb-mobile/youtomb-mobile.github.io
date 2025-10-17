@@ -56,7 +56,6 @@
       }).catch(() => {});
     }
 
-    // Get the reason from the URL query parameter ?reason=...
     function getReasonFromURL() {
       const params = new URLSearchParams(window.location.search);
       const reason = params.get("reason");
