@@ -53,16 +53,20 @@ function renderSettingOptionMenu(parent, somTitle, somSubtitle, somArray, somLSI
     parent.appendChild(settingOptionMenu);
 }
 
-// Render external links in sidebar
+// Load Links section
 function renderSidebarLinks() {
     const settingsOptCont = document.querySelector(".settings-categories-container");
     if (!settingsOptCont) return;
 
+    // Remove previous links
     const oldLinks = settingsOptCont.querySelector(".settings-links-group");
     if (oldLinks) oldLinks.remove();
 
     fetch("https://youtomb-mobile.github.io/link-content.json")
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.json();
+        })
         .then(data => {
             if (!Array.isArray(data)) return;
 
@@ -74,6 +78,8 @@ function renderSidebarLinks() {
             linkGroup.appendChild(linkTitle);
 
             data.forEach(linkItem => {
+                if (!linkItem.title || !linkItem.link) return;
+
                 const a = document.createElement("a");
                 a.textContent = linkItem.title;
                 a.href = linkItem.link;
@@ -114,6 +120,7 @@ function settingsPage() {
         { type: "option", title: AboutYTm15_text_string, link: "index.html#/about", id: "about" }
     ];
 
+    // Build sidebar categories
     optArray.forEach(item => {
         const settingsOpt = document.createElement("a");
         settingsOpt.innerHTML = item.title;
@@ -126,6 +133,7 @@ function settingsPage() {
         settingsOptCont.appendChild(settingsOpt);
     });
 
+    // Render dynamic Links section
     renderSidebarLinks();
 
     const settingsPagesCont = document.createElement("div");
@@ -163,6 +171,7 @@ function settingsPage() {
         headerTitle.textContent = Settings_text_string;
         title.textContent = Settings_text_string + ' - 2015YouTube';
 
+        // Always update links
         renderSidebarLinks();
 
         if (pageId === "general") {
