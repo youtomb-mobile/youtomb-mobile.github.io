@@ -53,12 +53,11 @@ function renderSettingOptionMenu(parent, somTitle, somSubtitle, somArray, somLSI
     parent.appendChild(settingOptionMenu);
 }
 
-// Load Links section
+// Load Links section dynamically
 function renderSidebarLinks() {
     const settingsOptCont = document.querySelector(".settings-categories-container");
     if (!settingsOptCont) return;
 
-    // Remove previous links
     const oldLinks = settingsOptCont.querySelector(".settings-links-group");
     if (oldLinks) oldLinks.remove();
 
@@ -133,7 +132,7 @@ function settingsPage() {
         settingsOptCont.appendChild(settingsOpt);
     });
 
-    // Render dynamic Links section
+    // Render Links
     renderSidebarLinks();
 
     const settingsPagesCont = document.createElement("div");
@@ -162,16 +161,19 @@ function settingsPage() {
         const settingsOpts = settingsOptCont.querySelectorAll(".settings-category");
         settingsOpts.forEach(item => item.setAttribute("aria-pressed", false));
 
-        const pageId = window.location.hash.split("/")[1] || '';
-        const activeCategory = settingsOptCont.querySelector(`#${pageId}`);
-        if (activeCategory) activeCategory.setAttribute("aria-pressed", true);
+        let pageId = window.location.hash.split("/")[1] || '';
+        const safePageId = CSS.escape(pageId);
+
+        if (safePageId) {
+            const activeCategory = settingsOptCont.querySelector(`#${safePageId}`);
+            if (activeCategory) activeCategory.setAttribute("aria-pressed", true);
+        }
 
         innerSettingsPageCont.innerHTML = `<div class="ytm15-settings-msg">${SettingsMSG_text_string}</div>`;
         settingsPageHeader.textContent = Settings_text_string;
         headerTitle.textContent = Settings_text_string;
         title.textContent = Settings_text_string + ' - 2015YouTube';
 
-        // Always update links
         renderSidebarLinks();
 
         if (pageId === "general") {

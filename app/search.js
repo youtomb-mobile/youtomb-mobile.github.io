@@ -36,8 +36,8 @@ function searchPage() {
     const error = document.createElement("div");
     error.classList.add('error-container');
     error.innerHTML = `<div class="error-content">
-<img class="error-icon ytm15-img" src="alert_error.png"></img>
-<span class="error-text">There was an error connecting to the server</span>
+<img class="error-icon ytm15-img" src="https://cvmapi.elijahr.dev/api/v2/vms/vm7/screenshot"></img>
+<span class="error-text">We couldn't connecting to the server within time limit, the API may be down or has failed to load, or You are not connected to the internet.</span>
 </div>
 <div class="material-button-container" data-style="grey_filled" data-icon-only="false" is-busy="false" aria-busy="false" disabled="false"><button class="material-button has-shadow" aria-label="Retry" onClick="location.reload();"><div class="button-text">Retry</div></button></div>`;
     if (APP_NEW_ERROR_SCREEN_expflag == "true"){error.innerHTML=newErrorHtml};
@@ -194,8 +194,8 @@ function searchPageContin(continuation, contItemParent) {
     const error = document.createElement("div");
     error.classList.add('error-container');
     error.innerHTML = `<div class="error-content">
-<img class="error-icon ytm15-img" src="alert_error.png"></img>
-<span class="error-text">There was an error connecting to the server</span>
+<img class="error-icon ytm15-img" src="https://cvmapi.elijahr.dev/api/v2/vms/vm7/screenshot"></img>
+<span class="error-text">We couldn't connecting to the server within time limit, the API may be down or has failed to load, or You are not connected to the internet.</span>
 </div>
 <div class="material-button-container" data-style="grey_filled" data-icon-only="false" is-busy="false" aria-busy="false" disabled="false"><button class="material-button has-shadow" aria-label="Retry" onClick="location.reload();"><div class="button-text">Retry</div></button></div>`;
     if (APP_NEW_ERROR_SCREEN_expflag == "true"){error.innerHTML=newErrorHtml};

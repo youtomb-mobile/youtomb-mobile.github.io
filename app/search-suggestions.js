@@ -1,6 +1,6 @@
 function renderSearchSuggestions(parent, value, sbInput) {
 const xhttpr = new XMLHttpRequest();
-xhttpr.open('GET', 'https://corsproxy.io/?url=https://clients1.google.com/complete/search?client=youtube&hl=en&gl=us&sugexp=ytd2_arm_5&gs_rn=23&gs_ri=youtube&ds=yt&cp=7&gs_id=s&q=' + value, true);
+xhttpr.open('GET', 'https://clients1.google.com/complete/search?client=youtube&hl=en&gl=us&sugexp=ytd2_arm_5&gs_rn=23&gs_ri=youtube&ds=yt&cp=7&gs_id=s&q=' + value, true);
 
 xhttpr.send();
  
