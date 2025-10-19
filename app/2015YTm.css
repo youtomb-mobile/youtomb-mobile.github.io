@@ -6131,6 +6131,6 @@ font-style: italic;
 }
 
 
-.search-button {
+button.search-button {
     display: none;
 }
