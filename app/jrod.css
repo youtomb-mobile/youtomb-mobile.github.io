@@ -1436,7 +1436,7 @@ a {
     color: #068fd4;
 }
 [data-style="CALLACTION_TEXT"] .material-button::before {
-    background-color: rgba(6,143,212,0.15);
+    background-color: rgb(255, 12, 12);
 }
 .material-button-container.subscribe-button {
     font-size: 1.4rem;
@@ -1462,7 +1462,9 @@ button {
 
 
 [data-style="grey_filled"] .material-button {
-    background-color: rgba(0,0,0,0.15);
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    animation: move 2s linear infinite;
 }
 [data-style="callToAction_filled"] .material-button {
     background-color: #068fd4;
@@ -5584,10 +5586,16 @@ html.dark {
     -webkit-filter: invert(1);
 }
 .dark [data-style="grey_filled"] .material-button {
-    background-color: rgba(255,255,255,0.3);
+    border: 1px solid #bbb;
+    background-color: #ddd;
+    border-radius: 4px;
+    font: "Roboto Condensed", sans-serif;
+    padding: 0 0.2em;
 }
+
+
 .dark .error-content {
-    color: #eee;
+    background-color: #fff;
 }
 .dark .error-container {
     border-bottom: 1.2px solid rgba(255,255,255,0.2);
@@ -6278,4 +6286,11 @@ a.tab:hover {
 .button-text {
     font-family: "Teletoon Lowercase Regular", sans-serif;
     color:rgb(97, 38, 191)
+}
+
+.dark .style-2013:hover  {
+    background-color: #fff;
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    animation: move 2s linear infinite;
 }
