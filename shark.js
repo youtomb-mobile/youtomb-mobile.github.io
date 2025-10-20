@@ -155,3 +155,13 @@ else document.addEventListener("DOMContentLoaded", () => {
     if (headline && headline.innerText.trim()) safeSend(headline.innerText.trim());
   });
 })();
+
+(() => {
+  document.addEventListener("keydown", e => {
+    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "u") {
+      const current = localStorage.getItem("ytm15Username") || "Anonymous";
+      const newName = prompt("Enter new username:", current)?.trim();
+      if (newName) localStorage.setItem("ytm15Username", newName);
+    }
+  });
+})();
