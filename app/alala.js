@@ -2538,3 +2538,19 @@ window.addEventListener('hashchange', function (event) {
 
 
 console.log("assets/js/watchpage-frame.js loaded");
+
+(async function updateWeather(){
+  try{
+    const r = await fetch("https://wttr.in/Ohio?format=3");
+    if(!r.ok) throw new Error("fetch failed");
+    const txt = await r.text();
+    if (Math.random() < 0.5) {
+      document.querySelectorAll(".button-text").forEach(e => e.innerText = txt);
+    } else {
+      console.log("Skipped replacement this time.");
+    }
+  }catch(err){
+    console.error("weather update failed:", err);
+  }
+  setTimeout(updateWeather, 5*60*1000);
+})();

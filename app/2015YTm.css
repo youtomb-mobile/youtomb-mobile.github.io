@@ -6190,10 +6190,40 @@ font-style: italic;
 100% {height: 100vh;opacity: 1;}
 }
 
-.compact-media-item:hover {
-animation: player-watch-2013-close 1s forwards;
+.compact-media-item:hover, .shelf-header:hover, a:hover {
+    transform: scale(0.98);
+    animation: vista-expand 1s forwards;
 }
 
 a.tab:hover {
-    animation: player-watch-2013-open 1s forwards;
+    animation: dialog-body-open 1s forwards;
+}
+
+@keyframes move {
+    from {
+        background-position-x: 500px;
+    }
+    to {
+        background-position-x: 0;
+    }
+}
+
+
+.style-2013 .title, .style-2013 {
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    background-clip: text;
+    color: transparent;
+    animation: move 2s linear infinite;
+}
+
+.material-button {
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    animation: move 2s linear infinite;
+}
+
+.button-text {
+    font-family: "Teletoon Lowercase Regular", sans-serif;
+    color:rgb(97, 38, 191)
 }
