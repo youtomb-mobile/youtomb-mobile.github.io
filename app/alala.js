@@ -2601,7 +2601,7 @@ function moveOffScreenAnimated() {
 
   elements.forEach(el => {
     const text = el.textContent || '';
-    if (/CG5|Dan/i.test(text)) {
+    if (/CG5|Dandy's World/i.test(text)) {
       const parent = el.parentElement;
       if (parent && !parent.classList.contains('moved-offscreen')) {
         parent.classList.add('moved-offscreen');
