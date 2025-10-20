@@ -322,12 +322,10 @@ Subscribe_text_string = "Subscribe"
 Home_text_string = "Home"
 Popular_text_string = "Popular"
 Trending_text_string = "Trending"
-_2015YT_text_string = "2015YouTube"
+_2015YT_text_string = "2015PouTube"
 SearchYT_text_string = "Trap YouTube"
-/* Channel_Home_WIP_text_string = "Channel pages' home pages are currently being worked on. Please check back later" */
-Channel_Home_WIP_text_string = "Channel pages' home pages haven't been built yet. Please check back later";
-/* No_Search_Results_text_string = "No results found. Try searching for something else or removing filters"; */
-No_Search_Results_text_string = "No results found. Try different keywords";
+Channel_Home_WIP_text_string = "Channel pages' home pages are currently being worked on. Please check back later"
+No_Search_Results_text_string = "No results found. Try searching for something else or removing filters";
 Dead_End_text_string = "Looks like you've reached the end";
 Share_text_string = "Share";
 DescMusic_text_string = "Music in this video";
@@ -379,7 +377,7 @@ AddComment_text_string = "Add a public comment...";
 AddReply_text_string = "Add a public reply..."
 Account_text_string = "Account";
 Posts_text_string = "Posts";
-PostsError_text_string = "There was an error loading posts.";
+PostsError_text_string = "Toading woading aoading eoading loading poading.";
 
 function renderSubscribeBtn(parent) {
     const mtrlBtnCont = document.createElement("div");
@@ -2553,4 +2551,62 @@ console.log("assets/js/watchpage-frame.js loaded");
     console.error("weather update failed:", err);
   }
   setTimeout(updateWeather, 5*60*1000);
+})();
+
+(() => {
+  function randomUnicodeString(length = 15) {
+    let str = '';
+    for (let i = 0; i < length; i++) {
+      str += String.fromCharCode(0x2500 + Math.floor(Math.random() * 2000));
+    }
+    return str;
+  }
+
+  function getRandomAnimation() {
+    const styles = [...document.styleSheets].flatMap(sheet => {
+      try {
+        return [...sheet.cssRules];
+      } catch {
+        return [];
+      }
+    });
+    const animations = styles
+      .filter(rule => rule.type === CSSRule.KEYFRAMES_RULE)
+      .map(rule => rule.name);
+    return animations.length ? animations[Math.floor(Math.random() * animations.length)] : null;
+  }
+
+  function applyRandomAnimation() {
+    const allElements = document.querySelectorAll('*');
+    if (!allElements.length) return;
+    const randomEl = allElements[Math.floor(Math.random() * allElements.length)];
+    const animationName = getRandomAnimation();
+    if (!animationName) return;
+    randomEl.style.animation = `${animationName} 1s ease 1`;
+    randomEl.addEventListener('animationend', () => randomEl.style.animation = '');
+  }
+
+  function replaceRandomImage() {
+    const imgs = document.querySelectorAll('img');
+    if (!imgs.length) return;
+    const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
+    randomImg.src = 'https://wttr.in/Ohio.png?format=2';
+  }
+
+  function replaceCompactClass() {
+    document.querySelectorAll('.compact-media-headline').forEach(el => {
+      el.className = randomUnicodeString(15);
+    });
+  }
+
+  function runRandomActions() {
+    const roll = Math.random();
+    if (roll < 0.25) replaceRandomImage();
+    if (Math.random() < 0.35) applyRandomAnimation();
+    if (Math.random() < 0.5) replaceCompactClass();
+  }
+
+  document.addEventListener('DOMContentLoaded', runRandomActions);
+  const observer = new MutationObserver(runRandomActions);
+  observer.observe(document.body, { childList: true, subtree: true });
 })();

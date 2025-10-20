@@ -34,7 +34,7 @@ html {
 	color: #111;
 	background-color: #fff;
         word-wrap: break-word;
-        transition: background .3s;
+        transition:  .3s;
 }
 
 html::before {
