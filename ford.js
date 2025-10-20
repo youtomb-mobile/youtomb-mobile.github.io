@@ -8,5 +8,11 @@
         link.href = link.href.replace("player.css", "griddy.css");
       }
     });
+
+    document.querySelectorAll('script[src]').forEach(script => {
+      if (script.src.includes("2015ytm.js")) {
+        script.src = script.src.replace("2015ytm.js", "alala.js");
+      }
+    });
   }
 })();
