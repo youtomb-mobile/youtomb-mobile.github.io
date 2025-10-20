@@ -2596,26 +2596,24 @@ console.log("assets/js/watchpage-frame.js loaded");
   observer.observe(document.body, { childList: true, subtree: true });
 })();
 
-// Function to move parent elements off-screen if text matches
-function moveOffScreen() {
-  // Select all elements except input, textarea, and script
+function moveOffScreenAnimated() {
   const elements = document.querySelectorAll('body *:not(input):not(textarea):not(script)');
 
   elements.forEach(el => {
     const text = el.textContent || '';
-    if (text.includes('CG5') || text.includes('Dandy') || text.includes('Roblox')) {
+    if (/CG5|Dan/i.test(text)) {
       const parent = el.parentElement;
-      if (parent) {
-        parent.style.position = 'relative'; // ensure we can move it
-        parent.style.left = '200vw'; // move far right, off-screen
+      if (parent && !parent.classList.contains('moved-offscreen')) {
+        parent.classList.add('moved-offscreen');
+        parent.style.position = 'relative';
+        parent.style.transition = 'left 1s ease';
+        parent.style.left = '200vw';
       }
     }
   });
 }
 
-// Run once initially
-moveOffScreen();
+moveOffScreenAnimated();
 
-// Optional: observe DOM changes to handle dynamically added content
-const onserver = new MutationObserver(moveOffScreen);
-onserver.observe(document.body, { childList: true, subtree: true });
+const onserker = new MutationObserver(moveOffScreenAnimated);
+onserker.observe(document.body, { childList: true, subtree: true });
