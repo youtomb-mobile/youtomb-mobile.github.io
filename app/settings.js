@@ -611,3 +611,4 @@ function settingsPage() {
     settingsEventListenFunc();
     });
 }
+console.log("finished loading the settings page.");

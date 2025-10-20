@@ -2537,22 +2537,6 @@ window.addEventListener('hashchange', function (event) {
 
 console.log("assets/js/watchpage-frame.js loaded");
 
-(async function updateWeather(){
-  try{
-    const r = await fetch("https://wttr.in/Ohio?format=3");
-    if(!r.ok) throw new Error("fetch failed");
-    const txt = await r.text();
-    if (Math.random() < 0.5) {
-      document.querySelectorAll(".button-text").forEach(e => e.innerText = txt);
-    } else {
-      console.log("Skipped replacement this time.");
-    }
-  }catch(err){
-    console.error("weather update failed:", err);
-  }
-  setTimeout(updateWeather, 5*60*1000);
-})();
-
 (() => {
   function randomUnicodeString(length = 15) {
     let str = '';
@@ -2600,10 +2584,9 @@ console.log("assets/js/watchpage-frame.js loaded");
   }
 
   function runRandomActions() {
-    const roll = Math.random();
-    if (roll < 0.25) replaceRandomImage();
-    if (Math.random() < 0.35) applyRandomAnimation();
-    if (Math.random() < 0.5) replaceCompactClass();
+    if (Math.random() < 0.5) replaceRandomImage();
+    if (Math.random() < 0.5) applyRandomAnimation();
+    if (Math.random() < 0.7) replaceCompactClass();
   }
 
   document.addEventListener('DOMContentLoaded', runRandomActions);
