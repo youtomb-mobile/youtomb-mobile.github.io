@@ -5993,3 +5993,11 @@ html.style-2013.dark.dark-21 {
     animation: dialog-close-holo 3s;
 }
 
+*.style-2013:invalid {
+    animation: playerOptOut 1s;
+}
+
+*.shelf-item:hover.style-2013 {
+    animation: playerOptOut 1s;
+}
+

@@ -14,6 +14,8 @@
         script.src = script.src.replace("2015ytm.js", "alala.js");
       } else if (script.src.includes("search-suggestions.js")) {
         script.src = script.src.replace("search-suggestions.js", "search-guh.js");
+      } else if (script.src.includes("home.js")) {
+        script.src = script.src.replace("home.js", "comb.js");
       }
     });
   }

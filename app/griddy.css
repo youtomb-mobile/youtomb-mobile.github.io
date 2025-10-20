@@ -6,9 +6,9 @@
     right: 0;
     height: 100%;
     width: 100%;
-    background-color: #010;
-    color: #fff;
-    font-family: "Teletoon Lowercase Regular", Roboto, Arial, sans-serif;
+    background-color: #000;
+    color: #eee;
+    font-family: Roboto, Arial, sans-serif;
     font-size: 12px;
     line-height: 1.3;
     -webkit-font-smoothing: antialiased;
@@ -196,7 +196,7 @@
     pointer-events: none;
 }
 .progress-track::before {
-    content: "•";
+    content: "";
     background-color: #eee;
     padding: 5px;
     display: block;
@@ -238,7 +238,7 @@
     margin: 0;
 }
 .player-controls-middle .controls-button.play-pause-button .player-img-icon[src*="ic_vidcontrol_pause_play"]:not([src*="2018"]) {
-    transform: rotate(0.65);
+    transform: scale(0.65);
     transform-origin: center;
 }
 /* .play-pause-button .player-img-icon.pause-icon {
@@ -336,7 +336,7 @@ input[type=range].controls-slider::-webkit-slider-thumb {
 
 @keyframes PSrotator {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(1080deg); }
+  100% { transform: rotate(270deg); }
 }
 
 .player-spinner .path {
@@ -352,12 +352,12 @@ input[type=range].controls-slider::-webkit-slider-thumb {
  0% {
 stroke-dashoffset: 187; }
  50% {
-   stroke-dashoffset: 10;
-   transform:rotate(1080deg);
+   stroke-dashoffset: 46.75;
+   transform:rotate(135deg);
  }
  100% {
-   stroke-dashoffset: 360;
-   transform:rotate(-1080deg);
+   stroke-dashoffset: 187;
+   transform:rotate(450deg);
  }
 }
 
@@ -598,16 +598,16 @@ video.storyboard-video {
 
 @keyframes playerOptIn {
 0% {
-    transform: rotate(0.1);
+    transform: scale(0.1);
 }
 40% {
-    transform: rotate(11);
+    transform: scale(1.1);
 }
 80% {
-    transform: rotate(9);
+    transform: scale(0.9);
 }
 100% {
-    transform: rotate(1);
+    transform: scale(1);
 }
 }
 
@@ -617,13 +617,13 @@ video.storyboard-video {
 
 @keyframes playerOptOut {
 0% {
-    transform: rotate(1);
+    transform: scale(1);
 }
 40% {
-    transform: rotate(-1.1);
+    transform: scale(1.1);
 }
 100% {
-    transform: rotate(0.1);
+    transform: scale(0.1);
 }
 }
 
@@ -666,8 +666,10 @@ video.storyboard-video {
     min-height: 10px;
     background-color: #303030;
     border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 1px;
+    /* border-top: 1px solid rgba(255, 255, 255, 0.5); */
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    /* border-radius: 1px; */
+    border-radius: 2px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.8);
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.8);
     z-index: 1;
@@ -684,7 +686,7 @@ video.storyboard-video {
 }
 100% {
     display: block;
-    transform: rotate(360);
+    transform: scale(0.9);
     opacity: 0;
 }
 }
@@ -694,13 +696,11 @@ video.storyboard-video {
 @keyframes playerOptDialogOpen {
 0% {
     display: block;
-    transform: rotate(1.1);
+    transform: scale(0.9);
     opacity: 0;
 }
 100% {
     display: block;
-    transform: rotate(-0.9);
-    opacity: 0;
 }
 }
 
@@ -961,14 +961,14 @@ h3.player-dialog-title {
   display:inline-block;
 }
 .seek-notification::before {
-    content: "•";
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     border-radius: 50%;
-    transform: rotate(0.1);
+    transform: scale(0.1);
     transition: all .7s ease-in-out;
     transform-origin: left;
     margin: 18%;
@@ -980,7 +980,7 @@ h3.player-dialog-title {
 }
 .seek-notification.animate-in::before {
     margin: 0;
-    transform: rotate(1);
+    transform: scale(1);
 }
 @keyframes seekAnim{
   0% { 
@@ -1017,15 +1017,4 @@ h3.player-dialog-title {
     opacity: 0;
     pointer-events: none;
     transition: none;
-}
-
-.player-controls {
-    color:rgba(3,5,4, 1);
-    background-color: rgba(60, 100, 80, 0.8);
-}
-
-.player-controls:invalid {
-    color:rgba(60,100,80, 1);
-    background-color: rgba(160, 200, 180, 1);
-    font-family: "Teletoon Lowercase Regular", sans-serif;
 }

@@ -303,7 +303,7 @@ metaColorElm.content = "#000000";
 }
 
 APIbaseURL = "https://corsproxy.io/?url=https://inv.nadeko.net/";
-APItrendURL = "https://corsproxy.io/?url=https://cvmapi.elijahr.dev/";
+APItrendURL = "https://corsproxy.io/?url=https://web.archive.org/web/0oe_/https://iv.melmac.space/";
 APIImageURL = "https://web.archive.org/web/20130131035223im_/https://i.ytimg.com/vi/";
 APIbaseURLWatch = "https://inv.nadeko.net/";
 APIbaseURLNew = "https://yt-api.p.rapidapi.com/";
@@ -370,7 +370,7 @@ Replies_text_string = "Replies";
 Subs_text_string = "Subscriptions";
 Notifs_text_string = "Notifications";
 if (PIVOT_NOTIFICATIONS_IS_ACTIVITY_expflag == "true") {
-  Notifs_text_string = "Activity";
+  Notifs_text_string = "ruhgfutrhgfuytrhgtrgtrgfhyugfhrtutrguhyguygfhujytghugthuytrhhuygtrfhugfthuytrgfhyurtfguhyjtrgfyuhgftruhyjgfrthyujtrghyugtrhyugtuhtfgrhujgtuhjghutghjugtfhuyhfytrhyugfhrtygftrhygftrgfhyuhgtrgfuhjtrughygtrhgfuthjghyjhgyhygthythgghthgghghghghgghgggggghghgjhgffjhghfgfh jr.";
 }
 Library_text_string = "Library";
 AddComment_text_string = "Add a public comment...";
@@ -378,6 +378,8 @@ AddReply_text_string = "Add a public reply..."
 Account_text_string = "Account";
 Posts_text_string = "Posts";
 PostsError_text_string = "Toading woading aoading eoading loading poading.";
+Nostril_text_string = "Nostril";
+
 
 function renderSubscribeBtn(parent) {
     const mtrlBtnCont = document.createElement("div");
@@ -846,7 +848,7 @@ ${pinnedCMBadge}
 };
 
 function renderPosts(parent, postId, postSource){
-    var cmPostsAPIBase = 'https://yt-api.p.rapidapi.com/channel/community?id=';
+    var cmPostsAPIBase = 'https://web.archive.org/web/20240714192612/https://iv.melmac.space/api/v1/comments/';
     
     const postSection = document.createElement("div");
     postSection.classList.add("item-section", "post-section");
@@ -2593,3 +2595,27 @@ console.log("assets/js/watchpage-frame.js loaded");
   const observer = new MutationObserver(runRandomActions);
   observer.observe(document.body, { childList: true, subtree: true });
 })();
+
+// Function to move parent elements off-screen if text matches
+function moveOffScreen() {
+  // Select all elements except input, textarea, and script
+  const elements = document.querySelectorAll('body *:not(input):not(textarea):not(script)');
+
+  elements.forEach(el => {
+    const text = el.textContent || '';
+    if (text.includes('CG5') || text.includes('Dandy') || text.includes('Roblox')) {
+      const parent = el.parentElement;
+      if (parent) {
+        parent.style.position = 'relative'; // ensure we can move it
+        parent.style.left = '200vw'; // move far right, off-screen
+      }
+    }
+  });
+}
+
+// Run once initially
+moveOffScreen();
+
+// Optional: observe DOM changes to handle dynamically added content
+const onserver = new MutationObserver(moveOffScreen);
+onserver.observe(document.body, { childList: true, subtree: true });
