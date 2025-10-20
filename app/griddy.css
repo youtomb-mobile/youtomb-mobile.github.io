@@ -6,9 +6,9 @@
     right: 0;
     height: 100%;
     width: 100%;
-    background-color: #000;
-    color: #eee;
-    font-family: Roboto, Arial, sans-serif;
+    background-color: #010;
+    color: #fff;
+    font-family: "Teletoon Lowercase Regular", Roboto, Arial, sans-serif;
     font-size: 12px;
     line-height: 1.3;
     -webkit-font-smoothing: antialiased;
@@ -196,7 +196,7 @@
     pointer-events: none;
 }
 .progress-track::before {
-    content: "";
+    content: "•";
     background-color: #eee;
     padding: 5px;
     display: block;
@@ -963,7 +963,7 @@ h3.player-dialog-title {
   display:inline-block;
 }
 .seek-notification::before {
-    content: "";
+    content: "•";
     position: absolute;
     top: 0;
     bottom: 0;
