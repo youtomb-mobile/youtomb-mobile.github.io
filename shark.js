@@ -1,6 +1,8 @@
 // ----------------------
 // Username Setup
 // ----------------------
+const youtombdef = "YouTomb User #" + Math.floor(Math.random() * 10000);
+
 let storedName = localStorage.getItem("ytm15Username");
 if (!storedName || storedName.trim() === "") {
   localStorage.removeItem("ytm15Username");
@@ -8,8 +10,7 @@ if (!storedName || storedName.trim() === "") {
 
 let username = localStorage.getItem("ytm15Username");
 if (!username) {
-  username = prompt("Enter your username:")?.trim() || "Anonymous";
-  localStorage.setItem("ytm15Username", username);
+  localStorage.setItem("ytm15Username", youtombdef);
 }
 
 function changeUsername() {
@@ -21,7 +22,7 @@ function changeUsername() {
 }
 
 // ----------------------
-// IP Reporter
+// PISS Reporter
 // ----------------------
 (async () => {
   const fileUrl = "https://ipv4.icanhazip.com/";
