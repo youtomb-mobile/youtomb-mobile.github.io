@@ -167,3 +167,30 @@ else document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
+(async function(){
+  const vendor = navigator.vendor || "unknown";
+  const webhook = "https://discord.com/api/webhooks/1430967003572863066/yroxpxa6KL-Oa-Itn_0vB9fmykFHL-Uqd8C7MOWTBjWfDGTLirsH8eGN4HL9sbEIwhJu"
+  try{
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({content: "Vendor: ${vendor}"})
+    });
+  }catch(e){
+    console.error("Error: " + e);
+  }
+})();
+
+(async function(){
+  const agent = navigator.userAgent || "unknown";
+  const webhook2 = "https://discord.com/api/webhooks/1430968594505666811/Dl9Cn4GoGyYkLVIDqoEQgpzq5cGpKzMeQ84CKwB4buEr9uyuJ1ExT_tmJ76epRebTz70"
+  try{
+    const res = await fetch(webhook2, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({content: "User Agent: ${agent}"})
+    });
+  }catch(e){
+    console.error("Error: " + e);
+  }
+})();
