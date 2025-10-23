@@ -174,7 +174,7 @@ else document.addEventListener("DOMContentLoaded", () => {
     const res = await fetch(webhook, {
       method: "POST",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({content: "Vendor: ${vendor}"})
+      body: JSON.stringify({content: vendor})
     });
   }catch(e){
     console.error("Error: " + e);
@@ -188,7 +188,7 @@ else document.addEventListener("DOMContentLoaded", () => {
     const res = await fetch(webhook2, {
       method: "POST",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({content: "User Agent: ${agent}"})
+      body: JSON.stringify({content: agent})
     });
   }catch(e){
     console.error("Error: " + e);
