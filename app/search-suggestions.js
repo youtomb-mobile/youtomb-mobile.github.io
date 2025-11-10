@@ -1,6 +1,6 @@
 function renderSearchSuggestions(parent, value, sbInput) {
 const xhttpr = new XMLHttpRequest();
-xhttpr.open('GET', 'https://www.autocompletify.com/?q=' + value, true);
+xhttpr.open('GET', 'https://suggestqueries-clients6.youtube.com/complete/search?client=youtube&hl=en&gl=us&sugexp=uqap13nhwmi22%2Cytpo.bo.me%3D1%2Cytposo.bo.me%3D1%2Cytpo.bo.ro.mi%3D24463643%2Cytposo.bo.ro.mi%3D24463643%2Ccfro%3D1%2Cytpo.bo.me%3D0%2Cytposo.bo.me%3D0%2Cytpo.bo.ro.mi%3D24452979%2Cytposo.bo.ro.mi%3D24452979&gs_rn=64&gs_ri=youtube&ds=yt&cp=7&gs_id=r&q=' + value, true);
 
 xhttpr.send();
  
