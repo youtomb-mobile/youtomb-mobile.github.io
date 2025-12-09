@@ -1928,7 +1928,7 @@ setTimeout(function(){
   ytm15Watch.setAttribute("style", ``);
   }
   }
-}, 01);
+}, 0o1);
 document.body.classList.remove("has-watchpage");
 };
 exitWatch.setAttribute("aria-label", "Exit watchpage");
@@ -2001,7 +2001,7 @@ setTimeout(function(){
   ytm15Watch.setAttribute("style", ``);
   }
   }
-}, 01);
+}, 0o1);
 document.body.classList.add("has-watchpage");
 };
 openWatch.setAttribute("aria-label", "Open watchpage");
