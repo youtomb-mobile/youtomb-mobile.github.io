@@ -1,6 +1,6 @@
 function renderSearchSuggestions(parent, value, sbInput) {
 const xhttpr = new XMLHttpRequest();
-xhttpr.open('GET', 'https://corsproxy.io/?https://web.archive.org/web/20130126213003if_/https://clients1.google.com/complete/search?client=youtube-lr&ds=yt&hl=en_US&xhr=t&oe=utf-8&nonce=1517369033424&q=' + value, true);
+xhttpr.open('GET', 'https://api.piped.private.coffee/suggestions?query=' + value, true);
 
 xhttpr.send();
  
