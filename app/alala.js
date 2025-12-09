@@ -16,7 +16,7 @@ headerIsChannel = 'false';
 
 dataModeChange();
 
-   var rippleV2Interval = setInterval(function(){
+/* var rippleV2Interval = setInterval(function(){
    var rippleElms = document.querySelectorAll(".has-ripple");
    var rippleElms1 = document.querySelectorAll(".compact-media-item");
    var rippleElms2 = document.querySelectorAll(".shelf-header");
@@ -75,7 +75,7 @@ dataModeChange();
    Array.from(rippleElms6).forEach(function(item){
     renderRippleV2(item);
    });
-}, 10);
+}, 10); */
 
 documentHTML = document.querySelector("html");
 
@@ -85,8 +85,7 @@ metaColor2 = "#CCCCCC";
 metaColor3 = "#131313";
 metaColor4 = "#B9B9B9";
 metaColor5 = "#464646";
-metaColor6 = "lime";
-defaultMetaColor = metaColor6;
+defaultMetaColor = metaColor1;
 
 function localStorageChange(){
 DISABLE_YTM15_APP_BORDER_expflag = localStorage.getItem("DISABLE_YTM15_APP_BORDER");
@@ -303,8 +302,8 @@ metaColorElm.content = "#000000";
 }
 
 APIbaseURL = "https://corsproxy.io/?url=https://inv.nadeko.net/";
-APItrendURL = "https://corsproxy.io/?url=https://web.archive.org/web/0oe_/https://iv.melmac.space/";
-APIImageURL = "https://web.archive.org/web/20130131035223im_/https://i.ytimg.com/vi/";
+APItrendURL = "https://corsproxy.io/?url=https://cvmapi.elijahr.dev/";
+APIImageURL = "https://i.ytimg.com/vi/";
 APIbaseURLWatch = "https://inv.nadeko.net/";
 APIbaseURLNew = "https://yt-api.p.rapidapi.com/";
 APIbaseURLPiped = "https://pipedapi.leptons.xyz/";
@@ -322,10 +321,12 @@ Subscribe_text_string = "Subscribe"
 Home_text_string = "Home"
 Popular_text_string = "Popular"
 Trending_text_string = "Trending"
-_2015YT_text_string = "2015PouTube"
-SearchYT_text_string = "Trap YouTube"
-Channel_Home_WIP_text_string = "Channel pages' home pages are currently being worked on. Please check back later"
-No_Search_Results_text_string = "No results found. Try searching for something else or removing filters";
+_2015YT_text_string = "2015YouTube"
+SearchYT_text_string = "Search YouTube"
+/* Channel_Home_WIP_text_string = "Channel pages' home pages are currently being worked on. Please check back later" */
+Channel_Home_WIP_text_string = "Channel pages' home pages haven't been built yet. Please check back later";
+/* No_Search_Results_text_string = "No results found. Try searching for something else or removing filters"; */
+No_Search_Results_text_string = "No results found. Try different keywords";
 Dead_End_text_string = "Looks like you've reached the end";
 Share_text_string = "Share";
 DescMusic_text_string = "Music in this video";
@@ -333,7 +334,7 @@ LearnMore_text_string = "Learn more";
 Song_text_string = "Song";
 Artist_text_string = "Artist";
 Album_text_string = "Album";
-SongLicensed_text_string = "Licensed to NouTube by";
+SongLicensed_text_string = "Licensed to YouTube by";
 Suggestions_text_string = "Suggestions";
 Settings_text_string = "Settings";
 General_text_string = "General";
@@ -361,7 +362,7 @@ Shorts_text_string = "Short uploads";
 PopularUploads_text_string = "Popular uploads";
 NoChannels_text_string = "This channel doesn't feature any other channels.";
 Comments_text_string = "Comments";
-CommentsError_text_string = "Comments are either disabled or oijroroirejerifjjioefjiofeiofejfrijofrojiefjifeijoefjoifeijofeijoerijoerfjio."
+CommentsError_text_string = "Comments are either disabled or unavailable."
 PinnedBy_text_string = "Pinned by ";
 Cancel_text_string = "Cancel";
 Ok_text_string = "Ok";
@@ -370,16 +371,14 @@ Replies_text_string = "Replies";
 Subs_text_string = "Subscriptions";
 Notifs_text_string = "Notifications";
 if (PIVOT_NOTIFICATIONS_IS_ACTIVITY_expflag == "true") {
-  Notifs_text_string = "ruhgfutrhgfuytrhgtrgtrgfhyugfhrtutrguhyguygfhujytghugthuytrhhuygtrfhugfthuytrgfhyurtfguhyjtrgfyuhgftruhyjgfrthyujtrghyugtrhyugtuhtfgrhujgtuhjghutghjugtfhuyhfytrhyugfhrtygftrhygftrgfhyuhgtrgfuhjtrughygtrhgfuthjghyjhgyhygthythgghthgghghghghgghgggggghghgjhgffjhghfgfh jr.";
+  Notifs_text_string = "Activity";
 }
 Library_text_string = "Library";
 AddComment_text_string = "Add a public comment...";
 AddReply_text_string = "Add a public reply..."
 Account_text_string = "Account";
 Posts_text_string = "Posts";
-PostsError_text_string = "Toading woading aoading eoading loading poading.";
-Nostril_text_string = "Nostril";
-
+PostsError_text_string = "There was an error loading posts.";
 
 function renderSubscribeBtn(parent) {
     const mtrlBtnCont = document.createElement("div");
@@ -848,7 +847,7 @@ ${pinnedCMBadge}
 };
 
 function renderPosts(parent, postId, postSource){
-    var cmPostsAPIBase = 'https://web.archive.org/web/20240714192612/https://iv.melmac.space/api/v1/comments/';
+    var cmPostsAPIBase = 'https://yt-api.p.rapidapi.com/channel/community?id=';
     
     const postSection = document.createElement("div");
     postSection.classList.add("item-section", "post-section");
@@ -1367,7 +1366,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
 
         } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "Material_2") {
         menuCont.classList.add("menu-style-mtrl-2");
-        } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == navigator.userAgent + "YouTube") {
+        } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "YouTube") {
         menuCont.classList.add("menu-style-youtube");
         }
         menuCont.setAttribute("style", `left: ${rect.left - menuCont.offsetWidth + window.scrollX + 11}px; top: ${rect.top + window.scrollY - 10}px; margin: 7px;`);
@@ -1387,7 +1386,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
 
         const menuItemBtnShare = document.createElement("button");
         menuItemBtnShare.classList.add("menu-item-button", "has-ripple");
-        menuItemBtnShare.textContent = "FUCK THIS SHIT IM OUT";
+        menuItemBtnShare.textContent = "Sharing will be implemented soon";
         menuItemBtnShare.setAttribute("style", "opacity: .7;")
         menuItemBtnShare.onclick = function(){
             
@@ -1474,7 +1473,7 @@ function renderCompactMediaItem(parent, parentName, itemVideoId, itemThumbnail, 
 }
 
 function renderMediaItem(parent, parentName, itemVideoId, itemThumbnail, itemLength, itemTitle, itemAuthor, itemAuthorId, itemPublishedText, itemViewCount) {
-        /* const channelData = fetch('https://web.archive.org/web/0oe_/https://yt.lemnoslife.com/noKey/channels?part=snippet,statistics,status&id=' + item.authorId); */
+        /* const channelData = fetch('https://yt.lemnoslife.com/noKey/channels?part=snippet,status&id=' + item.authorId); */
 
         const itemSect = document.createElement("div");
         itemSect.classList.add('item-section');
@@ -1643,7 +1642,7 @@ function renderMediaItem(parent, parentName, itemVideoId, itemThumbnail, itemLen
         }); */
 
         const channelData = new XMLHttpRequest();
-        channelData.open('GET', 'https://web.archive.org/web/20240907161736/https://yt.lemnoslife.com/noKey/channels?part=snippet,statistics,status&id=' + itemAuthorId, true);
+        channelData.open('GET', 'https://gdata.vidtape.lol/console_browse?start-index=1&max-results=40&feed=videos_recently_featured&racy=include&app=desktop&id=' + itemAuthorId, true);
  
         channelData.send();
  
@@ -1710,7 +1709,7 @@ function renderMediaItem(parent, parentName, itemVideoId, itemThumbnail, itemLen
 
         } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "Material_2") {
         menuCont.classList.add("menu-style-mtrl-2");
-        } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == navigator.userAgent) {
+        } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "YouTube") {
         menuCont.classList.add("menu-style-youtube");
         }
         menuCont.setAttribute("style", `left: ${rect.left - menuCont.offsetWidth + window.scrollX + 11}px; top: ${rect.top + window.scrollY - 10}px; margin: 7px;`);
@@ -2236,11 +2235,11 @@ function menuRenderer() {
     menuCont.classList.remove("menu-style-holo", "menu-style-mtrl-2", "menu-style-youtube", "is-watch");
     if (DEFAULT_POPUP_MENU_STYLE_expflag == "Holo") {
     menuCont.classList.add("menu-style-holo");
-    } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "Marterial") {
+    } else if (DEFAULT_MEDIA_POPUP_MENU_STYLE_expflag == "Material") {
 
-    } else if (DEFAULT_POPUP_MENU_STYLE_expflag == "Marterial_2") {
+    } else if (DEFAULT_POPUP_MENU_STYLE_expflag == "Material_2") {
     menuCont.classList.add("menu-style-mtrl-2");
-    } else if (DEFAULT_POPUP_MENU_STYLE_expflag == navigator.userAgent) {
+    } else if (DEFAULT_POPUP_MENU_STYLE_expflag == "YouTube") {
     menuCont.classList.add("menu-style-youtube");
     }
 }
@@ -2375,16 +2374,17 @@ setTimeout(function() {
 }, 300);
 }
 
+// credit to Sean McPherson for the original code: https://codepen.io/SeanMcP/pen/RmWJvV
 function callback(mutationsList, observer) {
-    console.log('Mutations:', mutationsList)
-    console.log('Observer:', observer)
+    /* console.log('Mutations:', mutationsList) */
+    /* console.log('Observer:', observer) */
     mutationsList.forEach(mutation => {
         if (mutation.attributeName === 'class') {
             if (mutation.target.classList.contains("has-watchpage")) {
             metaColorBeforeWP = metaColorElm.content;
             metaColorElm.content = "#000000";
             } else {
-            metaColorElm.content = metaColorBeforeWP;
+            /* metaColorElm.content = metaColorBeforeWP; */
             metaColorChange();
             }
         }
@@ -2537,83 +2537,4 @@ window.addEventListener('hashchange', function (event) {
 
 
 
-console.log("assets/js/watchpage-frame.js loaded");
-
-(() => {
-  function randomUnicodeString(length = 15) {
-    let str = '';
-    for (let i = 0; i < length; i++) {
-      str += String.fromCharCode(0x2500 + Math.floor(Math.random() * 2000));
-    }
-    return str;
-  }
-
-  function getRandomAnimation() {
-    const styles = [...document.styleSheets].flatMap(sheet => {
-      try {
-        return [...sheet.cssRules];
-      } catch {
-        return [];
-      }
-    });
-    const animations = styles
-      .filter(rule => rule.type === CSSRule.KEYFRAMES_RULE)
-      .map(rule => rule.name);
-    return animations.length ? animations[Math.floor(Math.random() * animations.length)] : null;
-  }
-
-  function applyRandomAnimation() {
-    const allElements = document.querySelectorAll('*');
-    if (!allElements.length) return;
-    const randomEl = allElements[Math.floor(Math.random() * allElements.length)];
-    const animationName = getRandomAnimation();
-    if (!animationName) return;
-    randomEl.style.animation = `${animationName} 1s ease 1`;
-    randomEl.addEventListener('animationend', () => randomEl.style.animation = '');
-  }
-
-  function replaceRandomImage() {
-    const imgs = document.querySelectorAll('img');
-    if (!imgs.length) return;
-    const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
-    randomImg.src = 'https://wttr.in/Ohio.png?format=2';
-  }
-
-  function replaceCompactClass() {
-    document.querySelectorAll('.compact-media-headline').forEach(el => {
-      el.className = randomUnicodeString(15);
-    });
-  }
-
-  function runRandomActions() {
-    if (Math.random() < 0.5) replaceRandomImage();
-    if (Math.random() < 0.5) applyRandomAnimation();
-    if (Math.random() < 0.7) replaceCompactClass();
-  }
-
-  document.addEventListener('DOMContentLoaded', runRandomActions);
-  const observer = new MutationObserver(runRandomActions);
-  observer.observe(document.body, { childList: true, subtree: true });
-})();
-
-function moveOffScreenAnimated() {
-  const elements = document.querySelectorAll('body *:not(input):not(textarea):not(script)');
-
-  elements.forEach(el => {
-    const text = el.textContent || '';
-    if (/CG5|Dandy's World/i.test(text)) {
-      const parent = el.parentElement;
-      if (parent && !parent.classList.contains('moved-offscreen')) {
-        parent.classList.add('moved-offscreen');
-        parent.style.position = 'relative';
-        parent.style.transition = 'left 1s ease';
-        parent.style.left = '200vw';
-      }
-    }
-  });
-}
-
-moveOffScreenAnimated();
-
-const onserker = new MutationObserver(moveOffScreenAnimated);
-onserker.observe(document.body, { childList: true, subtree: true });
+console.log()
