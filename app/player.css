@@ -592,7 +592,7 @@ video.storyboard-video {
     text-transform: uppercase;
     color: rgba(255,255,255,0.8);
     font-size: 14px;
-    animation: playerOptOut .4s;
+    animation: slideInDown .4s;
     max-width: 80px;
 }
 
@@ -612,7 +612,7 @@ video.storyboard-video {
 }
 
 .player-options-shown .player-options-item {
-    animation: playerOptIn .7s;
+    animation: slideOutDown .7s;
 }
 
 @keyframes playerOptOut {
@@ -676,7 +676,7 @@ video.storyboard-video {
     color: #f1f1f1;
     padding: 0;
     overflow: auto;
-    animation: playerOptDialogClose .25s;
+    animation: tada .71s;
     top: 0;
     bottom: 0;
 }
@@ -691,7 +691,7 @@ video.storyboard-video {
 }
 }
 [open].player-options-dialog {
-    animation: playerOptDialogOpen .25s;
+    animation: slideInLeft .5s;
 }
 @keyframes playerOptDialogOpen {
 0% {
